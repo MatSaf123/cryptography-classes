@@ -6,14 +6,26 @@ class VigenereCoder():
     UPPERCASE_A_ASCII_CODE = 65
 
     def __init__(self, secret):
+
+        '''
+            Validates if secret is composed only of 
+            uppercase alphabetical characters.
+        '''
+
         assert secret != '', 'Secret cannot be empty.'
         assert secret.isalpha() and secret.isupper(), 'Secret must be uppercase-alphabetical only.'
         self.secret = secret
 
     def generateKeyFromSecret(self, str_in) -> str:
-        #   THIS GENERATOR WORKS WITH SPACES IN CLEARTEXT
-        #   FOR EVERY SPACE ENCOUNTERED, INCREASE CHARS_SKIPPED COUNTER BY ONE
-        #   CHARS_SKIPPED IS LATER USED TO MAINTAIN SECRET-CHARS ORDER
+        
+        '''
+            Key generator, able to work with spaces
+            in cleartext by adding spaces in key and 
+            maintaining order of characters using 
+            chars_skipped value. Returns a string
+            key value.
+        '''
+
         key = ''
         chars_skipped = 0
         for i in range(len(str_in)):
@@ -26,6 +38,10 @@ class VigenereCoder():
 
     def encode(self, str_in: str) -> str:
         
+        '''
+            Encodes cleartext with Vigenere cipher.
+        '''
+
         assert str_in != '', 'Input string cannot be empty.'
         
         str_out = ''
@@ -40,6 +56,10 @@ class VigenereCoder():
 
     def decode(self, str_in: str) -> str:
         
+        '''
+            Decodes encrypted text with Vigenere cipher.
+        '''
+
         assert str_in != '', 'Input string cannot be empty.'
         
         str_out = ''

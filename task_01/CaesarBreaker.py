@@ -25,5 +25,10 @@ class CaesarBreaker():
 
         coder = CaesarCoder(x)
         str_out = coder.decode(str_in)
-
+        print('Full text:',str_out)
         return str_out
+
+#   Lorem Ipsum - 'ORUHP LSVXP GRORU VLW DPHW FRQVHFWHWXU DGLSLVFLQJ HOLW PDXULV DXJXH QLVL VROOLFLWXGLQ LG VDJLWWLV VHG WULVWLTXH YHO LSVXP SURLQ DOLTXDP OXFWXV PDXULV'
+ENCRYPTED_TEXT = input('Enter encrypted text: ')
+cb = CaesarBreaker()
+cb.decipherCaesar(ENCRYPTED_TEXT)
