@@ -11,6 +11,12 @@ class CaesarCoder:
 
     def encode(self, str_in: str) -> str:
 
+        '''
+
+        Encodes cleartext with Caesar cipher.
+
+        '''
+
         assert str_in != '', 'Input string cannot be empty.'
         str_out = ''
         
@@ -22,10 +28,15 @@ class CaesarCoder:
             #   IF NOT UPPERCASE/ALPHA, REWRITE CHAR
             else:
                 str_out += c
-
         return str_out
     
     def decode(self, str_in: str) -> str:
+        
+        '''
+
+        Decodes encrypted text with Caesar cipher.
+
+        '''
 
         assert str_in != '', 'Input string cannot be empty.'
         str_out = ''
