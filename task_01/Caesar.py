@@ -3,56 +3,44 @@ import string
 
 class CaesarCoder:
 
-    def __init__(self, stride=3):
+    ALPHABET_SIZE = 26
+    UPPERCASE_A_ASCII_CODE = 65
+
+    def __init__(self, stride = 3):
         self.stride = stride
 
     def encode(self, str_in):
+
+        assert str_in != '', 'Input string cannot be empty.'
 
         str_out = ''
         
         for i in range(len(str_in)):
             c = str_in[i]
-            
-            #   IF SPACE, SKIP
-            if ord(c) == 32:
-                str_out += ' '
-                continue
 
-            #   END IF INVALID INPUT
-            if c.isalpha() == False:
-                print('Invalid character in input string at index:',i)
-                return ''
-
-            #   ENCRYPT UPPERCASE
-            if c.isupper():
-                str_out += chr((ord(c) + self.stride - 65) % 26 + 65)
-            #   ENCRYPT LOWERCASE
+            #   ENCRYPT IF UPPERCASE ALPHABETICAL
+            if c.isupper() & c.isalpha():
+                str_out += chr((ord(c) + self.stride - self.UPPERCASE_A_ASCII_CODE) % self.ALPHABET_SIZE + self.UPPERCASE_A_ASCII_CODE)
+            #   IF NOT UPPERCASE/ALPHA, REWRITE CHAR
             else:
-                str_out += chr((ord(c) + self.stride - 97) % 26 + 97)
+                str_out += c
 
         return str_out
     
     def decode(self, str_in):
-        str_out = ''
 
+        assert str_in != '', 'Input string cannot be empty.'
+
+        str_out = ''
+        
         for i in range(len(str_in)):
             c = str_in[i]
 
-            #   IF SPACE, SKIP
-            if ord(c) == 32:
-                str_out += ' '
-                continue
-
-            #   END IF INVALID INPUT
-            if c.isalpha() == False:
-                print('Invalid character in input string at index:',i)
-                return ''
-
-            #   DECRYPT UPPERCASE
-            if c.isupper():
-                str_out += chr((ord(c) - self.stride - 65) % 26 + 65)
-            #   DECRYPT LOWERCASE
+            #   ENCRYPT IF UPPERCASE ALPHABETICAL
+            if c.isupper() & c.isalpha():
+                str_out += chr((ord(c) - self.stride - self.UPPERCASE_A_ASCII_CODE) % self.ALPHABET_SIZE + self.UPPERCASE_A_ASCII_CODE)
+            #   IF NOT UPPERCASE/ALPHA, REWRITE CHAR
             else:
-                str_out += chr((ord(c) - self.stride - 97) % 26 + 97)
+                str_out += c
 
         return str_out

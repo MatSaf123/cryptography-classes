@@ -3,50 +3,48 @@ from Caesar import CaesarCoder
 
 coder = CaesarCoder()
 
+def test_init():
+    assert type(coder) is CaesarCoder
+
 #   ENCODER
 
-def test_encode_lowercase():
-    test_str = 'abcdxyz'
-    assert coder.encode(test_str) == 'defgabc'
-
-def test_encode_uppercase():
+def test_encode():
     test_str = 'ABCDXYZ'
     assert coder.encode(test_str) == 'DEFGABC'
 
-def test_encode_lower_and_upper():
-    test_str = 'aBcDxYz'
-    assert coder.encode(test_str) == 'dEfGaBc'
-
 def test_encode_long():
     #   https://www.lipsum.com
-    test_str = 'Lorem ipsum dolor sit amet consectetur adipiscing elit Mauris augue nisi sollicitudin id sagittis sed tristique vel ipsum Proin aliquam luctus mauris'
-    assert coder.encode(test_str) == 'Oruhp lsvxp groru vlw dphw frqvhfwhwxu dglslvflqj holw Pdxulv dxjxh qlvl vroolflwxglq lg vdjlwwlv vhg wulvwltxh yho lsvxp Surlq doltxdp oxfwxv pdxulv'
+    test_str = 'LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISCING ELIT MAURIS AUGUE NISI SOLLICITUDIN ID SAGITTIS SED TRISTIQUE VEL IPSUM PROIN ALIQUAM LUCTUS MAURIS'
+    assert coder.encode(test_str) == 'ORUHP LSVXP GRORU VLW DPHW FRQVHFWHWXU DGLSLVFLQJ HOLW PDXULV DXJXH QLVL VROOLFLWXGLQ LG VDJLWWLV VHG WULVWLTXH YHO LSVXP SURLQ DOLTXDP OXFWXV PDXULV'
 
 def test_encode_invalid_char():
-    test_str = 'aB_d'
-    #   coder returns an empty string if it encounters an invalid char
-    assert coder.encode(test_str) == ''
+    test_str = 'ab_34_$%'
+    assert coder.encode(test_str) == 'ab_34_$%'
+
 
 #   DECODER
 
-def test_decode_lowercase():
-    test_str = 'defgabc'
-    assert coder.decode(test_str) == 'abcdxyz'
-
-def test_decode_uppercase():
+def test_decode():
     test_str = 'DEFGABC'
     assert coder.decode(test_str) == 'ABCDXYZ'
 
-def test_decode_lower_and_upper():
-    test_str = 'dEfGaBc'
-    assert coder.decode(test_str) == 'aBcDxYz'
-
 def test_decode_long():
     #   https://www.lipsum.com
-    test_str = 'Oruhp lsvxp groru vlw dphw frqvhfwhwxu dglslvflqj holw Pdxulv dxjxh qlvl vroolflwxglq lg vdjlwwlv vhg wulvwltxh yho lsvxp Surlq doltxdp oxfwxv pdxulv'
-    assert coder.decode(test_str) == 'Lorem ipsum dolor sit amet consectetur adipiscing elit Mauris augue nisi sollicitudin id sagittis sed tristique vel ipsum Proin aliquam luctus mauris'
+    test_str = 'ORUHP LSVXP GRORU VLW DPHW FRQVHFWHWXU DGLSLVFLQJ HOLW PDXULV DXJXH QLVL VROOLFLWXGLQ LG VDJLWWLV VHG WULVWLTXH YHO LSVXP SURLQ DOLTXDP OXFWXV PDXULV'
+    assert coder.decode(test_str) == 'LOREM IPSUM DOLOR SIT AMET CONSECTETUR ADIPISCING ELIT MAURIS AUGUE NISI SOLLICITUDIN ID SAGITTIS SED TRISTIQUE VEL IPSUM PROIN ALIQUAM LUCTUS MAURIS'
 
 def test_decode_invalid_char():
-    test_str = 'aB_d'
-    #   coder returns an empty string if it encounters an invalid char
-    assert coder.decode(test_str) == ''
+    test_str = 'ab_34_$%'
+    assert coder.decode(test_str) == 'ab_34_$%'
+
+#   --- 
+
+def test_negative_stride():
+    coder = CaesarCoder(-3)
+    test_str = 'XYZABC'
+    assert coder.encode(test_str) == 'UVWXYZ'
+
+def test_empty_str_in():
+    with pytest.raises(AssertionError):
+        test_str = ''
+        coder.encode(test_str)
