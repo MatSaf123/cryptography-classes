@@ -12,7 +12,7 @@ Run tests with:
 
 ```cmd
 
-pytest CaesarTests.py
-pytest VigenereTests.py
+pytest CaesarTest.py
+pytest VigenereTest.py
 
 ```
