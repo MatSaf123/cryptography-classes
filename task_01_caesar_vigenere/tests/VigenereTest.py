@@ -1,5 +1,5 @@
 import pytest
-from task_01_caesar_vigenere.src.Vigenere import VigenereCoder
+from src.Vigenere import VigenereCoder
 
 coder = VigenereCoder('TEST')
 
