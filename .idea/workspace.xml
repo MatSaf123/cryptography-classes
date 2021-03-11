@@ -4,7 +4,6 @@
     <list default="true" id="e2fc2963-a712-4a82-90f8-d172e829b813" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task_02_hash/src/HashFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_02_hash/src/HashFunctions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_02_hash/tests/HashFunctionsTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_02_hash/tests/HashFunctionsTest.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,8 +141,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python tests.pytest in HashFunctionsTest.py" />
-        <item itemvalue="Python tests.pytest for HashFunctionsTest.test_hash_file_doesnt_exist" />
         <item itemvalue="Python.HashFunctions" />
+        <item itemvalue="Python tests.pytest for HashFunctionsTest.test_hash_file_doesnt_exist" />
         <item itemvalue="Python tests.pytest in VigenereTest.py" />
         <item itemvalue="Python tests.pytest in CaesarTest.py" />
       </list>
@@ -166,9 +165,9 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/cryptography_classes$pytest_in_VigenereTest_py.coverage" NAME="pytest in VigenereTest.py Coverage Results" MODIFIED="1615471453735" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/task_01_caesar_vigenere/tests" />
-    <SUITE FILE_PATH="coverage/cryptography_classes$HashFunctions.coverage" NAME="HashFunctions Coverage Results" MODIFIED="1615475312155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/task_02_hash/src" />
+    <SUITE FILE_PATH="coverage/cryptography_classes$HashFunctions.coverage" NAME="HashFunctions Coverage Results" MODIFIED="1615482254516" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/task_02_hash/src" />
     <SUITE FILE_PATH="coverage/cryptography_classes$pytest_for_HashFunctionsTest_MyTestCase_test_something.coverage" NAME="pytest for HashFunctionsTest.MyTestCase.test_something Coverage Results" MODIFIED="1615468154002" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/task_02_hash/test" />
-    <SUITE FILE_PATH="coverage/cryptography_classes$pytest_in_HashFunctionsTest_py.coverage" NAME="pytest in HashFunctionsTest.py Coverage Results" MODIFIED="1615475057642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/task_02_hash/tests" />
+    <SUITE FILE_PATH="coverage/cryptography_classes$pytest_in_HashFunctionsTest_py.coverage" NAME="pytest in HashFunctionsTest.py Coverage Results" MODIFIED="1615482257848" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/task_02_hash/tests" />
     <SUITE FILE_PATH="coverage/cryptography_classes$HashFunctionsTest.coverage" NAME="HashFunctionsTest Coverage Results" MODIFIED="1615468269393" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/task_02_hash/test" />
     <SUITE FILE_PATH="coverage/cryptography_classes$test_vigenere.coverage" NAME="test_vigenere Coverage Results" MODIFIED="1615420001071" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/task_01_caesar_vigenere/tests" />
     <SUITE FILE_PATH="coverage/cryptography_classes$pytest_for_HashFunctionsTest_test_something.coverage" NAME="pytest for HashFunctionsTest.test_something Coverage Results" MODIFIED="1615469718066" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/task_02_hash/tests" />
@@ -176,6 +175,6 @@
     <SUITE FILE_PATH="coverage/cryptography_classes$pytest_for_VigenereTest_test_encode.coverage" NAME="pytest for VigenereTest.test_encode Coverage Results" MODIFIED="1615463030756" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/task_01_caesar_vigenere/tests" />
     <SUITE FILE_PATH="coverage/cryptography_classes$pytest_in_CaesarTest_py.coverage" NAME="pytest in CaesarTest.py Coverage Results" MODIFIED="1615471126543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/task_01_caesar_vigenere/tests" />
     <SUITE FILE_PATH="coverage/cryptography_classes$pytest_for_VigenereTest_test_init.coverage" NAME="pytest for VigenereTest.test_init Coverage Results" MODIFIED="1615463010395" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/task_01_caesar_vigenere/tests" />
-    <SUITE FILE_PATH="coverage/cryptography_classes$pytest_for_HashFunctionsTest_test_hash_file_doesnt_exist.coverage" NAME="pytest for HashFunctionsTest.test_hash_file_doesnt_exist Coverage Results" MODIFIED="1615473635520" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/task_02_hash/tests" />
+    <SUITE FILE_PATH="coverage/cryptography_classes$pytest_for_HashFunctionsTest_test_hash_file_doesnt_exist.coverage" NAME="pytest for HashFunctionsTest.test_hash_file_doesnt_exist Coverage Results" MODIFIED="1615482017847" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/task_02_hash/tests" />
   </component>
 </project>
