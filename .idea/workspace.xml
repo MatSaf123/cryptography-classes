@@ -3,7 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="e2fc2963-a712-4a82-90f8-d172e829b813" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task_01_caesar_vigenere/src/Caesar.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_01_caesar_vigenere/src/Caesar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task_01_caesar_vigenere/src/CaesarBreaker.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_01_caesar_vigenere/src/CaesarBreaker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task_01_caesar_vigenere/src/Vigenere.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_01_caesar_vigenere/src/Vigenere.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task_01_caesar_vigenere/tests/CaesarTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_01_caesar_vigenere/tests/CaesarTest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task_02_hash/src/HashFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_02_hash/src/HashFunctions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task_02_hash/tests/HashFunctionsTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_02_hash/tests/HashFunctionsTest.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
