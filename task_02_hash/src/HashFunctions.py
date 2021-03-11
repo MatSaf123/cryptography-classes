@@ -62,6 +62,8 @@ class Hashing:
             'hash_speed': []
         }
 
+        assert (algorithm in hl.algorithms_available), 'There is no available hash algorithm as given in params'
+
         for i in range(1, r + 1):
             s = ''.join(random.choices(string.ascii_lowercase + string.digits, k=i))
             results['string_lengths'].append(i)
