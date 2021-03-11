@@ -6,9 +6,9 @@ from timeit import default_timer as timer
 logger = logging.getLogger('hashing')
 logging.basicConfig(level=logging.DEBUG)
 
-def hash_with_all(str_in: str, display = True) -> list:
+def hash_with_all(str_in: str, display = True) -> dict:
 
-    l_out = []
+    d_out = {}
 
     for fun in hl.algorithms_available:
         out = hl.new(fun)
@@ -24,9 +24,9 @@ def hash_with_all(str_in: str, display = True) -> list:
             h = str(out.hexdigest())
         if display:
             logger.info(fun+'(): '+h+' , (t = '+str(end-start)+')')
-        l_out.append(h)
+        d_out[fun] = h
 
-    return l_out
+    return d_out
 
 def hash_from_file(file_path: str, display = True) -> str:
     try:
@@ -42,5 +42,3 @@ def hash_from_file(file_path: str, display = True) -> str:
         return out.hexdigest()
     except FileNotFoundError:
         raise FileNotFoundError('There is no file within given path')
-
-hash_with_all('test')
