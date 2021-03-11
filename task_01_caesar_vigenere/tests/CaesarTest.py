@@ -1,5 +1,5 @@
 import pytest
-from src.Caesar import CaesarCoder
+from task_01_caesar_vigenere.src.Caesar import CaesarCoder
 
 coder = CaesarCoder()
 
