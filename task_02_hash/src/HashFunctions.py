@@ -11,7 +11,7 @@ class Hashing:
     logging.basicConfig(level=logging.DEBUG)
 
     @staticmethod
-    def hash_with_all(str_in: str, display=True) -> dict:
+    def hash_with_all(str_in: str, display: bool = True) -> dict:
 
         """Returns and (optionally) displays hashing results and hashing times for all available hash algorithms."""
 
@@ -20,7 +20,7 @@ class Hashing:
         for fun in hl.algorithms_available:
 
             out = hl.new(fun, str_in.encode("UTF-8"))
-            t = timeit.timeit('lambda: hl.new(fun, str_in.encode("UTF-8"))')
+            t = timeit.timeit(lambda: hl.new(fun, str_in.encode("UTF-8")))
 
             if fun.startswith('shake'):
                 h = str(out.hexdigest(20))
@@ -33,7 +33,7 @@ class Hashing:
         return d_out
 
     @staticmethod
-    def hash_from_file(file_path: str, display=True) -> str:
+    def hash_from_file(file_path: str, display: bool = True) -> str:
 
         """Returns and (optionally) displays hash for a given file."""
 
@@ -67,7 +67,8 @@ class Hashing:
         for i in range(1, r + 1):
             s = ''.join(random.choices(string.ascii_lowercase + string.digits, k=i))
             results['string_lengths'].append(i)
-            results['hash_speed'].append(timeit.timeit('lambda: hl.new(fun, s.encode("UTF-8"))'))
+            results['hash_speed'].append(timeit.timeit(lambda: hl.new(algorithm, s.encode("UTF-8"))))
+            print(i)
 
         fig = px.line(results, x='string_lengths', y='hash_speed')
         fig.show()
