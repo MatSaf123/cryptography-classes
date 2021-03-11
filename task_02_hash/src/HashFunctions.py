@@ -1,6 +1,9 @@
 import hashlib as hl
 import logging
 import timeit
+import random
+import string
+import plotly.express as px
 
 logger = logging.getLogger('hashing')
 logging.basicConfig(level=logging.DEBUG)
@@ -15,7 +18,7 @@ def hash_with_all(str_in: str, display = True) -> dict:
         t = timeit.timeit('lambda: hl.new(fun, str_in.encode("UTF-8"))')
         h = None
         if(fun.startswith('shake')):
-            h = str(out.hexdigest(16))
+            h = str(out.hexdigest(20))
         else:
             h = str(out.hexdigest())
         if display:
@@ -40,4 +43,19 @@ def hash_from_file(file_path: str, display = True) -> str:
     except FileNotFoundError:
         raise FileNotFoundError('There is no file within given path')
 
-#hash_with_all('helloworld')
+def present_hash_time_for_strings(r: int = 30, algorithm: str = 'md5'):
+    results = {
+        'string_lengths'   : [],
+        'hash_speed' :   []
+    }
+
+    for i in range(1, r+1):
+        s = ''.join(random.choices(string.ascii_lowercase + string.digits, k=i))
+        results['string_lengths'].append(i)
+        results['hash_speed'].append(timeit.timeit('lambda: hl.new(fun, s.encode("UTF-8"))'))
+
+    fig = px.line(results, x='string_lengths', y='hash_speed')
+    fig.show()
+
+#present_hash_time_for_strings()
+#present_hash_time_for_strings(algorithm='shake_128')
