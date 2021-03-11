@@ -7,19 +7,21 @@ import plotly.express as px
 
 
 class Hashing:
-
     logger = logging.getLogger('hashing')
     logging.basicConfig(level=logging.DEBUG)
 
     @staticmethod
     def hash_with_all(str_in: str, display=True) -> dict:
+
+        """Returns and (optionally) displays hashing results and hashing times for all available hash algorithms."""
+
         d_out = {}
 
         for fun in hl.algorithms_available:
 
             out = hl.new(fun, str_in.encode("UTF-8"))
             t = timeit.timeit('lambda: hl.new(fun, str_in.encode("UTF-8"))')
-            h = None
+
             if fun.startswith('shake'):
                 h = str(out.hexdigest(20))
             else:
@@ -32,6 +34,9 @@ class Hashing:
 
     @staticmethod
     def hash_from_file(file_path: str, display=True) -> str:
+
+        """Returns and (optionally) displays hash for a given file."""
+
         try:
             with open(file_path, 'rb') as file:
                 out = hl.sha256()
@@ -48,6 +53,10 @@ class Hashing:
 
     @staticmethod
     def present_hash_time_for_strings(r: int = 30, algorithm: str = 'md5'):
+
+        """Displays hashing times for strings with various lengths on a plot.
+        Can be provided with custom string-count and hash algorithm."""
+
         results = {
             'string_lengths': [],
             'hash_speed': []
@@ -60,7 +69,3 @@ class Hashing:
 
         fig = px.line(results, x='string_lengths', y='hash_speed')
         fig.show()
-
-# Hashing.present_hash_time_for_strings()
-# Hashing.present_hash_time_for_strings(algorithm='shake_128')
-# Hashing.hash_with_all('hello')

@@ -7,12 +7,3 @@
 - [ ] ~~Wykonaj automatyczny łamacz szyfru Cezara.~~
 
 ###
-
-Run tests with:
-
-```cmd
-
-pytest CaesarTest.py
-pytest VigenereTest.py
-
-```
