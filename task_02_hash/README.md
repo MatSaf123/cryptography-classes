@@ -17,15 +17,16 @@ import task_02_hash.src.HashFunctions as hf
 
 #### hash_with_all(str_in: str, display: bool = True)
 
-- params: `str_in: str` (text input); `display: bool` (`True` if to display output logs)
+- params: `str_in: str` (text input); `display: bool` (<b>True</b> if to display output logs)
 - output: `d_out: dict` (dictionary filled with hashes, accessed by an algorithm name)
 ```py
 hf.Hashing.hash_with_all('Helloworld')
 h = hf.Hashing.hash_with_all('Helloworld', display = False)
+md5_result = h['md5']
 ```
 #### hash_from_file(str_in: str, display: bool = True)
 
-- params: `str_in: str` (text input); `display: bool` (`True` if to display output logs)
+- params: `str_in: str` (text input); `display: bool` (<b>True</b> if to display output logs)
 - output: `out.hexdigest(): str` (hash returned as a string)
 ```py
 hf.Hashing.hash_from_file('filename')

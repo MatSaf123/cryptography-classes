@@ -4,7 +4,6 @@
     <list default="true" id="e2fc2963-a712-4a82-90f8-d172e829b813" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task_02_hash/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/task_02_hash/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_02_hash/src/HashFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_02_hash/src/HashFunctions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,9 +140,9 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.HashFunctions" />
       <item itemvalue="Python tests.pytest in HashFunctionsTest.py" />
       <item itemvalue="Python tests.pytest in VigenereTest.py" />
-      <item itemvalue="Python.HashFunctions" />
       <item itemvalue="Python tests.pytest for HashFunctionsTest.test_hash_file_doesnt_exist" />
       <item itemvalue="Python tests.pytest for HashFunctionsTest.test_hash_from_file_ubuntu" />
     </list>
@@ -166,6 +165,7 @@
       <option name="presentableId" value="Default" />
       <updated>1615419774047</updated>
       <workItem from="1615419776309" duration="339000" />
+      <workItem from="1615755662533" duration="202000" />
     </task>
     <servers />
   </component>
