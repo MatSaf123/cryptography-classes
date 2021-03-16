@@ -1,21 +1,16 @@
-
-
-class VigenereCoder():
+class VigenereCoder:
     ALPHABET_SIZE = 26
     UPPERCASE_A_ASCII_CODE = 65
 
-    def __init__(self, secret):
-
-        """
-            Validates if secret is composed only of
-            uppercase alphabetical characters.
-        """
-
+    @staticmethod
+    def validate_input(cleartext: str, secret: str):
+        assert cleartext != '', 'Input string cannot be empty.'
         assert secret != '', 'Secret cannot be empty.'
-        assert secret.isalpha() and secret.isupper(), 'Secret must be uppercase-alphabetical only.'
-        self.secret = secret
+        assert secret.isalpha(), 'Secret must be alphabetical only.'
+        assert secret.isupper(), 'Secret must be uppercase only.'
 
-    def generateKeyFromSecret(self, str_in) -> str:
+    @staticmethod
+    def generate_key_from_secret(cleartext: str, secret: str) -> str:
 
         """
             Key generator, able to work with spaces
@@ -25,48 +20,51 @@ class VigenereCoder():
             key value.
         """
 
-        key = ''
-        chars_skipped = 0
-        for i in range(len(str_in)):
-            if str_in[i] == ' ':
-                key += str_in[i]
-                chars_skipped += 1
+        encoded_chars = []
+        skipped_chars = 0
+
+        for i in range(len(cleartext)):
+            if cleartext[i] == ' ':
+                encoded_chars.append(cleartext[i])
+                skipped_chars += 1
             else:
-                key += self.secret[(i - chars_skipped) % len(self.secret)]
-        return key
+                encoded_chars.append(secret[(i - skipped_chars) % len(secret)])
+        return ''.join(encoded_chars)
 
-    def encode(self, str_in: str) -> str:
+    @staticmethod
+    def encode(cleartext: str, secret: str) -> str:
 
-        """
-            Encodes cleartext with Vigenere cipher.
-        """
+        """Encodes cleartext with Vigenere cipher."""
 
-        assert str_in != '', 'Input string cannot be empty.'
+        VigenereCoder.validate_input(cleartext, secret)
 
-        str_out = ''
-        key = self.generateKeyFromSecret(str_in)
-        for i in range(len(str_in)):
-            c = str_in[i]
+        key = VigenereCoder.generate_key_from_secret(cleartext, secret)
+        encoded_chars = []
+
+        for i in range(len(cleartext)):
+            c = cleartext[i]
             if c.isupper() and c.isalpha():
-                str_out += chr((ord(c) + ord(key[i])) % self.ALPHABET_SIZE + self.UPPERCASE_A_ASCII_CODE)
+                encoded_chars.append(
+                    chr((ord(c) + ord(key[i])) % VigenereCoder.ALPHABET_SIZE + VigenereCoder.UPPERCASE_A_ASCII_CODE))
             else:
-                str_out += c
-        return str_out
+                encoded_chars.append(c)
+        return ''.join(encoded_chars)
 
-    def decode(self, str_in: str) -> str:
+    @staticmethod
+    def decode(cleartext: str, secret: str) -> str:
 
-        """
-            Decodes encrypted text with Vigenere cipher.
-        """
+        """Decodes encrypted text with Vigenere cipher."""
 
-        assert str_in != '', 'Input string cannot be empty.'
+        VigenereCoder.validate_input(cleartext, secret)
 
-        str_out = ''
-        key = self.generateKeyFromSecret(str_in)
-        for i in range(len(str_in)):
-            c = str_in[i]
+        key = VigenereCoder.generate_key_from_secret(cleartext, secret)
+        encoded_chars = []
+
+        for i in range(len(cleartext)):
+            c = cleartext[i]
             if c.isupper() and c.isalpha():
-                str_out += chr((ord(c) - ord(key[i])) % self.ALPHABET_SIZE + self.UPPERCASE_A_ASCII_CODE)
+                encoded_chars.append(
+                    chr((ord(c) - ord(key[i])) % VigenereCoder.ALPHABET_SIZE + VigenereCoder.UPPERCASE_A_ASCII_CODE))
             else:
-                str_out += c
-        return str_out
+                encoded_chars.append(c)
+        return ''.join(encoded_chars)

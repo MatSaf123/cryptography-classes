@@ -1,35 +1,21 @@
-from Caesar import CaesarCoder
+from Caesar import CaesarCoder as cc
 
 
-class CaesarBreaker():
+class CaesarBreaker:
 
-    def __init__(self):
-        pass
-
-    def decipherCaesar(self, str_in: str) -> str:
+    @staticmethod
+    def decipher_caesar_manual(encoded_text: str) -> str:
         """
             Takes encoded text, brute-force decrypts first part of it
-            and lets user decide, which of the decrypted texts is the
-            correct one.
+            and lets user decide, which of the decrypted strings is the
+            correct one. Then, decrypts the rest of text.
         """
 
-        coder = CaesarCoder(1)
-        ALPHABET_SIZE = coder.ALPHABET_SIZE
+        last_decrypted = cc.decode(encoded_text[0:20], 1)
+        for i in range(cc.ALPHABET_SIZE):
+            print(i + 1, ':', last_decrypted)
+            last_decrypted = cc.decode(last_decrypted, 1)
 
-        part_of_str = str_in[0:20]
-        last = coder.decode(part_of_str)
-        for i in range(ALPHABET_SIZE):
-            print(i + 1, ':', last)
-            last = coder.decode(last)
-        x = int(input('Which one is the correct one? (1-26): '))
-
-        coder = CaesarCoder(x)
-        str_out = coder.decode(str_in)
-        print('Full text:', str_out)
-        return str_out
-
-
-#   Lorem Ipsum - 'ORUHP LSVXP GRORU VLW DPHW FRQVHFWHWXU DGLSLVFLQJ HOLW PDXULV DXJXH QLVL VROOLFLWXGLQ LG VDJLWWLV VHG WULVWLTXH YHO LSVXP SURLQ DOLTXDP OXFWXV PDXULV'
-ENCRYPTED_TEXT = input('Enter encrypted text: ')
-cb = CaesarBreaker()
-cb.decipherCaesar(ENCRYPTED_TEXT)
+        correct_stride = int(input('Which one is the correct one? (1-26): '))
+        # print('Full text:', cc.decode(encoded_text, correct_stride))
+        return cc.decode(encoded_text, correct_stride)

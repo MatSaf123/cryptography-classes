@@ -1,44 +1,38 @@
-
-
 class CaesarCoder:
+
     ALPHABET_SIZE = 26
     UPPERCASE_A_ASCII_CODE = 65
 
-    def __init__(self, stride: int = 3):
-        self.stride = stride
+    @staticmethod
+    def encode(cleartext: str, stride: int) -> str:
 
-    def encode(self, str_in: str) -> str:
+        """Encodes cleartext with Caesar cipher."""
 
-        """
-        Encodes cleartext with Caesar cipher.
-        """
+        assert cleartext != '', 'Input string cannot be empty.'
 
-        assert str_in != '', 'Input string cannot be empty.'
-
-        str_out = ''
-        for i in range(len(str_in)):
-            c = str_in[i]
+        encoded_chars = []
+        for i in range(len(cleartext)):
+            c = cleartext[i]
             if c.isupper() and c.isalpha():
-                str_out += chr((ord(
-                    c) + self.stride - self.UPPERCASE_A_ASCII_CODE) % self.ALPHABET_SIZE + self.UPPERCASE_A_ASCII_CODE)
+                encoded_chars.append(chr((ord(
+                    c) + stride - CaesarCoder.UPPERCASE_A_ASCII_CODE) % CaesarCoder.ALPHABET_SIZE + CaesarCoder.UPPERCASE_A_ASCII_CODE))
             else:
-                str_out += c
-        return str_out
+                encoded_chars.append(c)
+        return ''.join(encoded_chars)
 
-    def decode(self, str_in: str) -> str:
+    @staticmethod
+    def decode(encrypted_text: str, stride: int) -> str:
 
-        """
-        Decodes encrypted text with Caesar cipher.
-        """
+        """Decodes encrypted text with Caesar cipher."""
 
-        assert str_in != '', 'Input string cannot be empty.'
+        assert encrypted_text != '', 'Input string cannot be empty.'
 
-        str_out = ''
-        for i in range(len(str_in)):
-            c = str_in[i]
+        decoded_chars = []
+        for i in range(len(encrypted_text)):
+            c = encrypted_text[i]
             if c.isupper() and c.isalpha():
-                str_out += chr((ord(
-                    c) - self.stride - self.UPPERCASE_A_ASCII_CODE) % self.ALPHABET_SIZE + self.UPPERCASE_A_ASCII_CODE)
+                decoded_chars.append(chr((ord(
+                    c) - stride - CaesarCoder.UPPERCASE_A_ASCII_CODE) % CaesarCoder.ALPHABET_SIZE + CaesarCoder.UPPERCASE_A_ASCII_CODE))
             else:
-                str_out += c
-        return str_out
+                decoded_chars.append(c)
+        return ''.join(decoded_chars)
