@@ -21,15 +21,15 @@ class CaesarCoder:
         return ''.join(encoded_chars)
 
     @staticmethod
-    def decode(encrypted_text: str, stride: int) -> str:
+    def decode(encoded_text: str, stride: int) -> str:
 
         """Decodes encrypted text with Caesar cipher."""
 
-        assert encrypted_text != '', 'Input string cannot be empty.'
+        assert encoded_text != '', 'Input string cannot be empty.'
 
         decoded_chars = []
-        for i in range(len(encrypted_text)):
-            c = encrypted_text[i]
+        for i in range(len(encoded_text)):
+            c = encoded_text[i]
             if c.isupper() and c.isalpha():
                 decoded_chars.append(chr((ord(
                     c) - stride - CaesarCoder.UPPERCASE_A_ASCII_CODE) % CaesarCoder.ALPHABET_SIZE + CaesarCoder.UPPERCASE_A_ASCII_CODE))

@@ -19,3 +19,4 @@ class CaesarBreaker:
         correct_stride = int(input('Which one is the correct one? (1-26): '))
         # print('Full text:', cc.decode(encoded_text, correct_stride))
         return cc.decode(encoded_text, correct_stride)
+

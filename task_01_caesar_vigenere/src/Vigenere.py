@@ -51,17 +51,17 @@ class VigenereCoder:
         return ''.join(encoded_chars)
 
     @staticmethod
-    def decode(cleartext: str, secret: str) -> str:
+    def decode(encoded_text: str, secret: str) -> str:
 
         """Decodes encrypted text with Vigenere cipher."""
 
-        VigenereCoder.validate_input(cleartext, secret)
+        VigenereCoder.validate_input(encoded_text, secret)
 
-        key = VigenereCoder.generate_key_from_secret(cleartext, secret)
+        key = VigenereCoder.generate_key_from_secret(encoded_text, secret)
         encoded_chars = []
 
-        for i in range(len(cleartext)):
-            c = cleartext[i]
+        for i in range(len(encoded_text)):
+            c = encoded_text[i]
             if c.isupper() and c.isalpha():
                 encoded_chars.append(
                     chr((ord(c) - ord(key[i])) % VigenereCoder.ALPHABET_SIZE + VigenereCoder.UPPERCASE_A_ASCII_CODE))
