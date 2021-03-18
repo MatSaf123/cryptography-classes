@@ -8,14 +8,14 @@ def register_user() -> None:
 
     username = InputValidation.read_username()
     password = InputValidation.read_password()
-    dm.add_user(username, password)
+    dc.add_user(username, password)
     logger.info('Account registered.')
 
 
 def display_users() -> None:
     """Displays all user data from database."""
 
-    for user in dm.get_all_users():
+    for user in dc.get_all_users():
         logger.info(user)
 
 
@@ -26,7 +26,7 @@ def log_in() -> None:
     username = input()
     logger.info('Enter your password:')
     password = input()
-    account = dm.get_user(username)
+    account = dc.get_user(username)
 
     if not account:
         logger.info('No account with given username found.')
@@ -53,7 +53,7 @@ class InputValidation:
         username = input()
         assert len(username) > 0, 'Username cannot be empty.'
 
-        while dm.get_user(username) is not None:
+        while dc.get_user(username) is not None:
             logger.info('Username taken, choose another username:')
             username = input()
         return username
@@ -80,7 +80,7 @@ class InputValidation:
 
 
 if __name__ == '__main__':
-    dm = DatabaseController()
+    dc = DatabaseController()
     logger = logging.getLogger('registering')
     logging.basicConfig(level=logging.DEBUG)
 

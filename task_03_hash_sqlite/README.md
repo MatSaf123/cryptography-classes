@@ -19,11 +19,7 @@
 ```
 #### from 'task_03_hsh_sqlite/src' directory.
 
-### Importing module:
-
-```python
-from task_03_hash_sqlite.src.database_controller import DatabaseController as dm
-```
+####
 
 #### register_user()
 
@@ -32,7 +28,7 @@ Used for adding new user to database. Has input validation implemented.
 - params: None
 - return: None
 ```python
-dm.register_user()
+register_user()
 ```
 
 #### display_users()
@@ -42,7 +38,7 @@ Displays all records from database: usernames, hashed passwords and salts.
 - params: None
 - return: None
 ```python
-dm.display_users()
+display_users()
 ```
 
 #### log_in()
@@ -53,7 +49,7 @@ there is an 'success' information displayed.
 - params: None
 - return: None
 ```python
-dm.log_in()
+log_in()
 ```
 
 ####
