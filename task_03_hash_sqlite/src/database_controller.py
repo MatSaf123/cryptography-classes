@@ -3,7 +3,7 @@ import os
 from models.user import User
 
 
-class DatabaseManager:
+class DatabaseController:
     """Handles database connections and CRUD operations."""
 
     DATABASE_PATHNAME = 'task-03-database.db'

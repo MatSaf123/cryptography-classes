@@ -1,11 +1,11 @@
-from task_03_hash_sqlite.src.database_manager import DatabaseManager
+from task_03_hash_sqlite.src.database_controller import DatabaseController
 from task_03_hash_sqlite.src.utility import Hashing as h
 import pytest
 import os
 
 if os.path.exists('task-03-database.db'):
     os.remove('task-03-database.db')
-dm = DatabaseManager()
+dm = DatabaseController()
 
 
 def test_init_database():

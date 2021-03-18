@@ -12,7 +12,7 @@
 ```cmd
     python task_03_hash_sqlite/src/accounts_manager_cli.py
 ```
-#### from root directory, or
+#### from root directory, or:
 
 ```cmd
     python accounts_manager_cli.py
@@ -22,7 +22,7 @@
 ### Importing module:
 
 ```python
-from task_03_hash_sqlite.src.database_manager import DatabaseManager as dm
+from task_03_hash_sqlite.src.database_controller import DatabaseController as dm
 ```
 
 #### register_user()

@@ -1,4 +1,4 @@
-from database_manager import DatabaseManager
+from database_controller import DatabaseController
 from utility import Verification as vf
 import logging
 
@@ -80,7 +80,7 @@ class InputValidation:
 
 
 if __name__ == '__main__':
-    dm = DatabaseManager()
+    dm = DatabaseController()
     logger = logging.getLogger('registering')
     logging.basicConfig(level=logging.DEBUG)
 
