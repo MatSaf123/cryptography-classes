@@ -4,16 +4,23 @@ from models.user import User
 
 
 class DatabaseManager:
-    """This class manages all database CRUD operations."""
+    """Handles database connections and CRUD operations."""
 
     DATABASE_PATHNAME = 'task-03-database.db'
 
     def __init__(self):
-        """Initializes DatabaseManager. If database file doesn't exist,
-        creates one."""
+        """Creates new database within given pathname (hardcoded above)."""
 
         if not os.path.exists(self.DATABASE_PATHNAME):
-            self.__initialize_database()
+            conn = sqlite3.connect(self.DATABASE_PATHNAME)
+            c = conn.cursor()
+            c.execute("""CREATE TABLE users (
+                        username text,
+                        password text,
+                        salt text
+                        )""")
+            conn.commit()
+            conn.close()
 
     def __connect_with_db(self) -> sqlite3.Connection:
         """Opens up connection with sqlite database.
@@ -27,38 +34,13 @@ class DatabaseManager:
         except sqlite3.Error:
             raise sqlite3.Error
 
-    def __initialize_database(self) -> bool:
-        """Creates new database within given pathname (hardcoded above).
-        If a database already exists in that place, it's replaced
-        by a new, empty one.
-
-        :return: True if successfully created database, False if didn't.
-        :rtype: bool
-        """
-
-        if os.path.isfile(self.DATABASE_PATHNAME):
-            os.remove(self.DATABASE_PATHNAME)
-
-        conn = sqlite3.connect(self.DATABASE_PATHNAME)
-        c = conn.cursor()
-        c.execute("""CREATE TABLE users (
-                    username text,
-                    password text,
-                    salt text
-                    )""")
-        conn.commit()
-        conn.close()
-        return True
-
-    def add_new_user(self, username: str, password: str) -> bool:
+    def add_user(self, username: str, password: str) -> None:
         """Adds new user to database.
 
         :param username: username for given user
         :type username: str
         :param password: password that is about to be hashed
         :type password: str
-        :return: True if successfully added new user, False if didn't
-        :rtype: bool
         """
 
         assert self.get_user(username) == [], 'Provided username is already in use.'
@@ -76,7 +58,22 @@ class DatabaseManager:
                    'salt': user.salt})
         conn.commit()
         conn.close()
-        return True
+
+    def delete_user(self, username: str) -> None:
+        """Removes user from database.
+
+        :param username: username of user that is about to get removed from db
+        :type username: str
+        """
+
+        conn = self.__connect_with_db()
+        c = conn.cursor()
+
+        assert self.get_user(username) != [], 'There is no such user in database.'
+
+        c.execute("DELETE FROM users WHERE username = :username", {'username': username})
+        conn.commit()
+        conn.close()
 
     def get_user(self, username: str) -> list:
         """Fetches a record from db with that contains provided username.
@@ -94,35 +91,16 @@ class DatabaseManager:
         conn.close()
         return user
 
-    def delete_user(self, username: str) -> bool:
-        """Removes user from database.
-
-                :param username: username of user that is about to get removed from db
-                :type username: str
-                :return: True if successfully added new user, False if didn't
-                :rtype: bool
-                """
-
-        conn = self.__connect_with_db()
-        c = conn.cursor()
-
-        assert self.get_user(username) != [], 'There is no such user in database.'
-
-        c.execute("DELETE FROM users WHERE username = :username", {'username': username})
-        conn.commit()
-        conn.close()
-        return True
-
     def get_all_users(self) -> list:
         """Fetches all records from db (only for testing purposes).
 
         :return: list of all records from db
         :rtype: list
         """
+
         conn = self.__connect_with_db()
         c = conn.cursor()
         c.execute("SELECT * FROM users")
         users = c.fetchall()
         conn.close()
         return users
-

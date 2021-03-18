@@ -8,5 +8,3 @@ class User:
         self.username = username
         self.salt = os.urandom(8)
         self.password = h.encrypt(password, self.salt)
-
-    # TODO: implement getters, setters
