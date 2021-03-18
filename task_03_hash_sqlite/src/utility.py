@@ -32,9 +32,9 @@ class Verification:
     def check_if_passwords_are_the_same(password: str, account: list) -> bool:
         """Check if hashed logging data is correct compared with database record.
 
-        :param password:
+        :param password: password entered by user
         :type password: str
-        :param account:
+        :param account: user data fetched from database
         :type account: list
         :return: boolean, if the passwords are the same
         :rtype: bool
