@@ -1,5 +1,5 @@
 from database_manager import DatabaseManager
-from utility import Hashing as h
+from utility import Verification as vf
 import logging
 
 
@@ -32,7 +32,7 @@ def log_in() -> None:
         logger.info('No account with given username found.')
         return
 
-    if account[1] == h.encrypt(password, account[2]):
+    if vf.verify_password(password, account):
         logger.info('Successfully logged in.')
     else:
         logger.info('Wrong password, try again.')
@@ -80,7 +80,7 @@ if __name__ == '__main__':
     dm = DatabaseManager()
     logger = logging.getLogger('registering')
     logging.basicConfig(level=logging.DEBUG)
-    # register_user()
+    register_user()
     # display_users()
     log_in()
 

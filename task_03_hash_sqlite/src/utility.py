@@ -25,3 +25,19 @@ class Hashing:
         return encrypted_password.hex()
 
 
+class Verification:
+    """All password verification functionality."""
+
+    @staticmethod
+    def verify_password(password: str, account: list) -> bool:
+        """Check if hashed logging data is correct compared with database record.
+
+        :param password:
+        :type password: str
+        :param account:
+        :type account: list
+        :return: boolean, if the passwords are the same
+        :rtype: bool
+        """
+
+        return account[1] == Hashing.encrypt(password, account[2])
