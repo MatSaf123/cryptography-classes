@@ -19,7 +19,9 @@
 ```
 #### from 'task_03_hsh_sqlite/src' directory.
 
-####
+#### 
+
+## Functionality:
 
 #### register_user()
 
