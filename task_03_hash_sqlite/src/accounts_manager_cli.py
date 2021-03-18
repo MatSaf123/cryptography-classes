@@ -1,4 +1,5 @@
 from database_manager import DatabaseManager
+from utility import Hashing as h
 import logging
 
 
@@ -18,7 +19,24 @@ def display_users() -> None:
         logger.info(user)
 
 
-# TODO: log-in functionality
+def log_in() -> None:
+    """Verifies login and password, simulates logging in with given credentials."""
+
+    logger.info('Enter your username:')
+    username = input()
+    logger.info('Enter your password:')
+    password = input()
+
+    account = dm.get_user(username)
+    if not account:
+        logger.info('No account with given username found.')
+        return
+
+    if account[1] == h.encrypt(password, account[2]):
+        logger.info('Successfully logged in.')
+    else:
+        logger.info('Wrong password, try again.')
+
 
 class InputValidation:
     """User input validation functionality."""
@@ -33,14 +51,14 @@ class InputValidation:
 
         logger.info('Enter username: ')
         username = input()
-        while not dm.get_user(username) == []:
+        while not dm.get_user(username) is None:
             logger.info('Username taken, choose another username:')
             username = input()
         return username
 
     @staticmethod
     def read_password() -> str:
-        """Read user input and return verified (repeated correctly) username.
+        """Read user input and return validated (repeated correctly by user) password.
 
         :return: password
         :rtype: str
@@ -62,7 +80,8 @@ if __name__ == '__main__':
     dm = DatabaseManager()
     logger = logging.getLogger('registering')
     logging.basicConfig(level=logging.DEBUG)
-    register_user()
-    display_users()
+    # register_user()
+    # display_users()
+    log_in()
 
 # TODO: write some better CLI

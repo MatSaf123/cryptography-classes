@@ -43,7 +43,7 @@ class DatabaseManager:
         :type password: str
         """
 
-        assert self.get_user(username) == [], 'Provided username is already in use.'
+        assert self.get_user(username) is None, 'Provided username is already in use.'
 
         conn = self.__connect_with_db()
         c = conn.cursor()
@@ -87,7 +87,7 @@ class DatabaseManager:
         conn = self.__connect_with_db()
         c = conn.cursor()
         c.execute("SELECT * FROM users WHERE username = :username", {'username': username})
-        user = c.fetchall()
+        user = c.fetchone()
         conn.close()
         return user
 
