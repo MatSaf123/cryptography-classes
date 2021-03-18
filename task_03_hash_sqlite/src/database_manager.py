@@ -88,6 +88,9 @@ class DatabaseManager:
         c = conn.cursor()
         c.execute("SELECT * FROM users WHERE username = :username", {'username': username})
         user = c.fetchone()
+
+        # assert user is not None, 'There is no user name as provided.'
+
         conn.close()
         return user
 

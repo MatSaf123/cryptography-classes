@@ -29,7 +29,7 @@ class Verification:
     """All password verification functionality."""
 
     @staticmethod
-    def verify_password(password: str, account: list) -> bool:
+    def check_if_passwords_are_the_same(password: str, account: list) -> bool:
         """Check if hashed logging data is correct compared with database record.
 
         :param password:

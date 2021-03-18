@@ -26,13 +26,13 @@ def log_in() -> None:
     username = input()
     logger.info('Enter your password:')
     password = input()
-
     account = dm.get_user(username)
+
     if not account:
         logger.info('No account with given username found.')
         return
 
-    if vf.verify_password(password, account):
+    if vf.check_if_passwords_are_the_same(password, account):
         logger.info('Successfully logged in.')
     else:
         logger.info('Wrong password, try again.')
@@ -51,7 +51,9 @@ class InputValidation:
 
         logger.info('Enter username: ')
         username = input()
-        while not dm.get_user(username) is None:
+        assert len(username) > 0, 'Username cannot be empty.'
+
+        while dm.get_user(username) is not None:
             logger.info('Username taken, choose another username:')
             username = input()
         return username
@@ -66,6 +68,7 @@ class InputValidation:
 
         logger.info('Enter your password: ')
         password = input()
+        assert len(password) > 0, 'Password cannot be empty.'
         logger.info('Repeat your password: ')
         password_repeated_correctly = (password == input())
         while not password_repeated_correctly:
@@ -81,7 +84,7 @@ if __name__ == '__main__':
     logger = logging.getLogger('registering')
     logging.basicConfig(level=logging.DEBUG)
     register_user()
-    # display_users()
-    log_in()
+    display_users()
+    # log_in()
 
 # TODO: write some better CLI
