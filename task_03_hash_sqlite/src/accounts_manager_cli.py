@@ -83,8 +83,9 @@ if __name__ == '__main__':
     dm = DatabaseManager()
     logger = logging.getLogger('registering')
     logging.basicConfig(level=logging.DEBUG)
-    register_user()
-    display_users()
-    # log_in()
 
-# TODO: write some better CLI
+    register_user()
+    # display_users()
+    log_in()
+
+# TODO: write some better CLI :D
