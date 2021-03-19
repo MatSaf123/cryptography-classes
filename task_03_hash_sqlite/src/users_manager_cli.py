@@ -1,6 +1,7 @@
 from database_controller import DatabaseController
 from utility import Hashing as h
 import logging
+import sys
 
 
 class Manager:
@@ -56,7 +57,7 @@ class Manager:
         else:
             self.logger.info('User added.')
 
-    def display_users(self) -> None:
+    def show_users(self) -> None:
         """Displays all user data from database."""
 
         for user in self.dc.get_all_users():
@@ -88,9 +89,33 @@ class Manager:
 
 
 if __name__ == '__main__':
-    m = Manager()
-    m.register_user()
-    # m.display_users()
-    m.log_in()
+    '''Main module.
+    
+    Flags for functionalities:
+    -r      register new user
+    -d      delete user
+    -s      show all users
+    -l      log in
+    -h      help commands
+    '''
 
-# TODO: write some better CLI :D
+    opts = [opt for opt in sys.argv[1:] if opt.startswith("-")]
+    m = Manager()
+
+    if "-r" in opts:
+        m.register_user()
+    elif "-d" in opts:
+        pass
+    elif "-s" in opts:
+        m.show_users()
+    elif "-l" in opts:
+        m.log_in()
+    elif "-h" in opts:
+        m.logger.info(f"Flags for functionalities:"
+                      f"\n-r      register new user"
+                      f"\n-d      delete user"
+                      f"\n-s      show all users"
+                      f"\n-l      log in"
+                      f"\n-h      help commands")
+    else:
+        raise SystemExit(f"Usage of this script: {sys.argv[0]} -r | -d | -s | -l | -h (type -h for help)")
