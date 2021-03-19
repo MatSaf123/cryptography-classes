@@ -5,23 +5,29 @@
 - [x] Zaprojektuj i zaimplementuj prosty własny sposób przechowywania haseł w bazie sqlite: użytkownik podaje hasło dwa razy, losujesz sól, hashujesz wszystko i zapisujesz hash oraz sól do bazy. Dodaj funkcję weryfikującą hasło.
 - [x] Przerób pkt 1. aby używał pbkdf2_hmac. Zrób z tego porządny projekt (testy, docstringi, itp.)
 
-### Usage:
+## Usage:
 
 #### Run with:
 
 ```cmd
-    python task_03_hash_sqlite/src/accounts_manager_cli.py
+    python task_03_hash_sqlite/src/users_manager_cli.py
 ```
 #### from root directory, or:
 
 ```cmd
-    python accounts_manager_cli.py
+    python users_manager_cli.py
 ```
 #### from 'task_03_hsh_sqlite/src' directory.
 
 #### 
 
-## Functionality:
+## Using functions:
+
+
+
+```python
+
+```
 
 #### register_user()
 

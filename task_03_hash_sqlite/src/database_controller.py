@@ -31,7 +31,7 @@ class DatabaseController:
 
         try:
             return sqlite3.connect(self.DATABASE_PATHNAME)
-        except sqlite3.Error:
+        except sqlite3.Error as e:
             raise sqlite3.Error
 
     def add_user(self, username: str, password: str) -> None:
@@ -43,7 +43,7 @@ class DatabaseController:
         :type password: str
         """
 
-        assert self.get_user(username) is None, 'Provided username is already in use.'
+        assert not self.user_exists_in_database(username), 'User with that username already exists.'
 
         conn = self.__connect_with_db()
         c = conn.cursor()
@@ -66,11 +66,13 @@ class DatabaseController:
         :type username: str
         """
 
+        try:
+            self.get_user(username)
+        except AssertionError:
+            raise ValueError('There is no user with provided username.')
+
         conn = self.__connect_with_db()
         c = conn.cursor()
-
-        assert self.get_user(username) != [], 'There is no such user in database.'
-
         c.execute("DELETE FROM users WHERE username = :username", {'username': username})
         conn.commit()
         conn.close()
@@ -88,14 +90,30 @@ class DatabaseController:
         c = conn.cursor()
         c.execute("SELECT * FROM users WHERE username = :username", {'username': username})
         user = c.fetchone()
-
-        # assert user is not None, 'There is no user name as provided.'
-
         conn.close()
+
+        assert user is not None, 'There is no user with provided username.'
+
         return user
 
+    def user_exists_in_database(self, username: str) -> bool:
+        """Checks if user with given name exists in the database.
+
+        :param username: username for given user
+        :type username: str
+        :return: True if user exists, False if not
+        :rtype: bool
+        """
+
+        try:
+            self.get_user(username)
+        except AssertionError:
+            return False
+        else:
+            return True
+
     def get_all_users(self) -> list:
-        """Fetches all records from db (only for testing purposes).
+        """Fetches all records from db.
 
         :return: list of all records from db
         :rtype: list

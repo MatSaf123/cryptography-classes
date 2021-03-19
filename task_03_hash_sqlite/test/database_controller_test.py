@@ -15,11 +15,11 @@ def test_init_database():
 def test_add_user_success():
     dc.add_user('user_01', 'coolpassword')
     user = dc.get_user('user_01')
-    assert user[1] == h.encrypt('coolpassword', user[2])
+    assert user[1] == h.hash('coolpassword', user[2])
 
 
 def test_add_user_already_exists():
-    with pytest.raises(Exception):
+    with pytest.raises(AssertionError):
         dc.add_user('user_01', 'coolpassword')
 
 
@@ -28,9 +28,11 @@ def test_get_all_users():
 
 
 def test_get_user_doesnt_exist():
-    assert dc.get_user('user_02') is None
+    with pytest.raises(AssertionError):
+        dc.get_user('user_02')
 
 
 def test_delete_user_success():
     dc.delete_user('user_01')
-    assert dc.get_user('user_01') is None
+    with pytest.raises(AssertionError):
+        dc.get_user('user_01')
