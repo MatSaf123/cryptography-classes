@@ -17,36 +17,42 @@
 ```cmd
     python users_manager_cli.py
 ```
-#### from 'task_03_hsh_sqlite/src' directory.
+#### from 'task_03_hsh_sqlite/src' directory with command line.
 
-#### 
+Use with flags to invoke certain functions:
 
-## Using functions:
-
-
-
-```python
-
+```cmd
+    -a      add new user
+    -d      delete user
+    -s      show all users
+    -l      log in      
+    -h      help commands
 ```
 
-#### register_user()
+All commands list:
 
-Used for adding new user to database. Has input validation implemented.
+#### add_user()
 
-- params: None
-- return: None
-```python
-register_user()
+Add new user in the database. Has input validation implemented.
+
+```cmd
+python users_manager_cli.py -a
 ```
 
-#### display_users()
+#### delete_user()
+
+Deletes targeted user from database. 
+
+```cmd
+python users_manager_cli.py -d
+```
+
+#### show_users()
 
 Displays all records from database: usernames, hashed passwords and salts.
 
-- params: None
-- return: None
-```python
-display_users()
+```cmd
+python users_manager_cli.py -s
 ```
 
 #### log_in()
@@ -54,12 +60,14 @@ display_users()
 Simulates logging in operation: user is asked to provide username and password; credentials are validated and if they're correct, 
 there is an 'success' information displayed.
 
-- params: None
-- return: None
-```python
-log_in()
+```cmd
+python users_manager_cli.py -l
 ```
 
-####
+#### help
 
-Rest of documentation (database_controller.py, utility.py) — soon.
+Displays all available flags and their descriptions.
+
+```cmd
+python users_manager_cli.py -h
+```
