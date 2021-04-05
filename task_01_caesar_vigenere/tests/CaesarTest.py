@@ -1,5 +1,5 @@
 import pytest
-from task_01_caesar_vigenere.src.Caesar import CaesarCoder as cc
+from src.Caesar import CaesarCoder as cc
 
 
 #   ENCODE

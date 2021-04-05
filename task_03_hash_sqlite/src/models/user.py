@@ -1,5 +1,5 @@
 import os
-from utility import Hashing as h
+from src.utility import Hashing as h
 
 
 class User:

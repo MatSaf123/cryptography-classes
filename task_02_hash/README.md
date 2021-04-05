@@ -10,7 +10,7 @@
 ## Usage:
 ### Importing module
 ```py
-import task_02_hash.src.HashFunctions as hf
+import src.HashFunctions as hf
 ```
 
 ### Using functions

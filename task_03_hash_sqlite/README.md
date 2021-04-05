@@ -10,11 +10,6 @@
 #### Run with:
 
 ```cmd
-    python task_03_hash_sqlite/src/users_manager_cli.py
-```
-#### from root directory, or:
-
-```cmd
     python users_manager_cli.py
 ```
 #### from 'task_03_hsh_sqlite/src' directory with command line.

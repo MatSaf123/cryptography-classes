@@ -1,5 +1,5 @@
 import pytest
-from task_02_hash.src import HashFunctions as hf
+from src import HashFunctions as hf
 
 
 def test_hash_from_file_success():

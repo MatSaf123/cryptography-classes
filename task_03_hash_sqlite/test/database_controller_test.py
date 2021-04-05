@@ -1,5 +1,5 @@
-from task_03_hash_sqlite.src.database_controller import DatabaseController
-from task_03_hash_sqlite.src.utility import Hashing as h
+from src.database_controller import DatabaseController
+from src.utility import Hashing as h
 import pytest
 import os
 
