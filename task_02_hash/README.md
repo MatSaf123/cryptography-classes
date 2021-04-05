@@ -8,7 +8,14 @@
 - [x] Za pomocą pakietu timeit zbadaj szybkość generowania hashy dla wiadomości o różnych rozmiarach. Przedstaw to na wykresie za pomocą matplotlib (mniej zalecane) czy plotly (zalecane).
 
 ## Usage:
-### Importing module
+
+#### Install required modules with:
+
+```cmd
+    pip install -r requirements.txt
+```
+
+### Importing functionalities
 ```py
 import src.HashFunctions as hf
 ```

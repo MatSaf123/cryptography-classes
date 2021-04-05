@@ -7,6 +7,12 @@
 
 ## Usage:
 
+#### Install required modules with:
+
+```cmd
+    pip install -r requirements.txt
+```
+
 #### Run with:
 
 ```cmd

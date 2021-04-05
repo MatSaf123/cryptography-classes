@@ -8,7 +8,14 @@
 
 
 ## Usage:
-### Importing modules
+
+#### Install required modules with:
+
+```cmd
+    pip install -r requirements.txt
+```
+
+### Importing functionalities
 ```py
 from src.Caesar import CaesarCoder as cc
 from src.Vigenere import VigenereCoder as vc
