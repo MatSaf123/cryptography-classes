@@ -4,6 +4,8 @@ from cryptography.fernet import Fernet
 
 class SymetricEncrypter:
 
+    KEY: str
+
     @staticmethod
     def generate_random_key() -> hex:
         """Symmetrically generate a random key
