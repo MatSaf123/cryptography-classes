@@ -50,7 +50,7 @@ class SymetricEncrypter:
         """Symmetrically decrypts encrypted text
 
         :param message: encrypted text entered by user
-        :return: True if successfully decrypted, False if didn't; encrypted message
+        :return: True if successfully decrypted, False if didn't; decrypted message
         :rtype: tuple[bool, bytes]
         """
 
