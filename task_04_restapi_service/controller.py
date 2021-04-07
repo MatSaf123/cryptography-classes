@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from encrypting.encrypt_symmetric import SymetricEncrypter
 from encrypting.encrypt_asymmetric import AsymmetricEncrypter
-from util import is_hexadecimal
 import logging
 
 logger = logging.getLogger('controller')
@@ -29,18 +28,14 @@ def get_random_key_symmetric() -> str:
 
 @app.post('/symmetric/key')
 def set_key_symmetric(key: str) -> bool:
-    """Sets up symmetric key on server
+    """Validates and sets up symmetric key on server
 
     :param key: key in hexadecimal format provided by user
     :return: True if successfully saved the key, False if didn't
     :rtype: bool
     """
 
-    if is_hexadecimal(key):
-        SE.KEY = key
-        return True
-    else:
-        return False
+    return SE.set_key(key)
 
 
 @app.post('/symmetric/encode')
@@ -52,12 +47,12 @@ def symmetric_encode(message: str) -> bytes:
     :rtype: bytes
     """
 
-    try:
-        assert SE.KEY is not None, 'Key value is not set'
-    except AssertionError:
-        logger.info('Set the key on the server before encoding a message.')
+    result: tuple = SE.encode(message)
+
+    if result[0]:
+        return result[1]
     else:
-        return SE.encode(message)
+        logger.info('You need to set up the key first before encoding anything.')
 
 
 @app.post('/symmetric/decode')
@@ -69,12 +64,12 @@ def symmetric_decode(message: str) -> bytes:
     :rtype: bytes
     """
 
-    try:
-        assert SE.KEY is not None
-    except AssertionError:
-        logger.info('Set the key on the server before decoding a message.')
+    result: tuple = SE.decode(message)
+
+    if result[0]:
+        return result[1]
     else:
-        return SE.decode(message)
+        logger.info('You need to set up the key first before decoding anything.')
 
 
 # asymmetric endpoints
