@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from encrypting.encrypt_symmetric import SymetricEncrypter
+from encrypting.encrypt_asymmetric import AsymmetricEncrypter
 from util import is_hexadecimal
 import logging
 
@@ -9,6 +10,7 @@ logging.basicConfig(level=logging.INFO)
 app = FastAPI()
 
 SE = SymetricEncrypter()
+AE = AsymmetricEncrypter()
 
 
 # symmetric endpoints
@@ -73,3 +75,17 @@ def symmetric_decode(message: str) -> bytes:
         logger.info('Set the key on the server before decoding a message.')
     else:
         return SE.decode(message)
+
+
+# asymmetric endpoints
+
+@app.get('/asymmetric/key')
+def get_random_keys_asymmetric() -> dict:
+    """Generates and returns random public and private asymmetric keys
+
+    :return: randomly generated asymmetric keys
+    :rtype: dict
+    """
+
+    keys = AE.generate_random_keys()
+    return keys
