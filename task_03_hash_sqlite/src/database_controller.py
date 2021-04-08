@@ -1,6 +1,6 @@
 import sqlite3
 import os
-from models.user import User
+from src.models.user import User
 
 
 class DatabaseController:

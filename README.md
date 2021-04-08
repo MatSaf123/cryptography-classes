@@ -1,6 +1,6 @@
 #   Cryptography
 
-Cryptography tasks and classes at UE Katowice, 2021. 
+Cryptography tasks and classes at UE Katowice, 2021.
 
 #
 
@@ -11,7 +11,10 @@ Cryptography tasks and classes at UE Katowice, 2021.
 
 #
 
-Run ```pip install -r requirements.txt``` to install required modules.
+Each task is supposed to be opened as a separate PyCharm project, with its own virtual environments!
+
+#
+
 
 Framework used for testing: [pytest](https://docs.pytest.org/en/stable/)
 

@@ -6,14 +6,20 @@
 - [x] Wykonaj manualny łamacz szyfru Cezara.
 - [ ] Wykonaj automatyczny łamacz szyfru Cezara.
 
-###
 
 ## Usage:
-### Importing modules
+
+#### Install required modules with:
+
+```cmd
+    pip install -r requirements.txt
+```
+
+### Importing functionalities
 ```py
-from task_01_caesar_vigenere.src.Caesar import CaesarCoder as cc
-from task_01_caesar_vigenere.src.Vigenere import VigenereCoder as vc
-from task_01_caesar_vigenere.src.CaesarBreaker import CaesarBreaker as cb
+from src.Caesar import CaesarCoder as cc
+from src.Vigenere import VigenereCoder as vc
+from src.CaesarBreaker import CaesarBreaker as cb
 ```
 
 ### Using functions (CaesarCoder)

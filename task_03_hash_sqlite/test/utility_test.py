@@ -1,4 +1,4 @@
-from task_03_hash_sqlite.src.utility import Hashing as h
+from src.utility import Hashing as h
 
 
 def test_hash_success():

@@ -7,12 +7,13 @@
 
 ## Usage:
 
-#### Run with:
+#### Install required modules with:
 
 ```cmd
-    python task_03_hash_sqlite/src/users_manager_cli.py
+    pip install -r requirements.txt
 ```
-#### from root directory, or:
+
+#### Run with:
 
 ```cmd
     python users_manager_cli.py
