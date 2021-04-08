@@ -47,12 +47,12 @@ def symmetric_encode(message: str) -> bytes:
     :rtype: bytes
     """
 
-    result: tuple = SE.encode(message)
+    result: bytes = SE.encode(message)
 
-    if result[0]:
-        return result[1]
-    else:
+    if result == b'':
         logger.info('You need to set up the key first before encoding anything.')
+    else:
+        return result
 
 
 @app.post('/symmetric/decode')
@@ -64,12 +64,12 @@ def symmetric_decode(message: str) -> bytes:
     :rtype: bytes
     """
 
-    result: tuple = SE.decode(message)
+    result: bytes = SE.decode(message)
 
-    if result[0]:
-        return result[1]
-    else:
+    if result == b'':
         logger.info('You need to set up the key first before decoding anything.')
+    else:
+        return result
 
 
 # asymmetric endpoints
@@ -84,3 +84,14 @@ def get_random_keys_asymmetric() -> dict:
 
     keys = AE.generate_random_keys()
     return keys
+
+
+@app.get('/asymmetric/key/ssh')
+def get_keys_in_ssh_format_asymmetric() -> dict:
+    """TODO
+
+    :return: asymmetric keys in OpenSSH format
+    :rtype: dict
+    """
+
+    return {}

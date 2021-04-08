@@ -30,34 +30,30 @@ class SymetricEncrypter:
         key = Fernet.generate_key()
         return key.hex()
 
-    def encode(self, message: str) -> tuple[bool, bytes]:
+    def encode(self, message: str) -> bytes:
         """Symmetrically encrypts cleartext
 
         :param message: cleartext entered by user
-        :return: True if successfully encrypted, False if didn't; encrypted message
-        :rtype: tuple[bool, bytes]
+        :return: encrypted message
+        :rtype: bytes
         """
 
-        try:
-            assert self.__KEY is not None
-        except AssertionError:
-            return False, b''
+        if self.__KEY is None:
+            return b''
         else:
             f = Fernet(bytes.fromhex(self.__KEY))
-            return True, f.encrypt(bytes(message, 'utf-8'))
+            return f.encrypt(bytes(message, 'utf-8'))
 
-    def decode(self, message) -> tuple[bool, bytes]:
+    def decode(self, message) -> bytes:
         """Symmetrically decrypts encrypted text
 
         :param message: encrypted text entered by user
-        :return: True if successfully decrypted, False if didn't; decrypted message
-        :rtype: tuple[bool, bytes]
+        :return: decrypted message
+        :rtype: bytes
         """
 
-        try:
-            assert self.__KEY is not None
-        except AssertionError:
-            return False, b''
+        if self.__KEY is None:
+            return b''
         else:
             f = Fernet(bytes.fromhex(self.__KEY))
-            return True, f.decrypt(bytes(message, 'utf-8'))
+            return f.decrypt(bytes(message, 'utf-8'))
