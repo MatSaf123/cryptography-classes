@@ -39,7 +39,7 @@ def set_key_symmetric(key: str) -> bool:
 
 
 @app.post('/symmetric/encode')
-def symmetric_encode(message: str) -> bytes:
+def encode_symmetric(message: str) -> bytes:
     """Encodes message entered by user with symmetrical key set on server
 
     :param message: cleartext to be encoded
@@ -56,7 +56,7 @@ def symmetric_encode(message: str) -> bytes:
 
 
 @app.post('/symmetric/decode')
-def symmetric_decode(message: str) -> bytes:
+def decode_symmetric(message: str) -> bytes:
     """Decodes message entered by user with symmetrical key set on server
 
     :param message: encoded text to be decoded
