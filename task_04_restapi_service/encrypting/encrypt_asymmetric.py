@@ -146,3 +146,68 @@ class AsymmetricEncrypter:
             return False
         else:
             return True
+
+    def encode_message(self, message: str) -> bytes:
+        """Encode message with asymmetric keys
+
+        :param message: message to be encrypted
+        :return: encrypted message
+        :rtype: bytes
+        """
+
+        if self.__KEYS['public_key'] is None:
+            raise ValueError('Key is not set')
+
+        public_key: bytes = bytes.fromhex(self.__KEYS['public_key'])
+
+        print('HERE2')
+        print(public_key)
+
+        key = serialization.load_ssh_public_key(
+            public_key,
+            backend=default_backend()
+        )
+
+        ciphertext = key.encrypt(
+            message.encode('utf-8').strip(),
+            padding.OAEP(
+                mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                algorithm=hashes.SHA256(),
+                label=None
+            )
+        )
+
+        return ciphertext
+
+    def decode_message(self, message: str) -> bytes:
+        """Decode message with asymmetric keys
+
+        :param message:
+        :return: decrypted message
+        :rtype: bytes
+        """
+
+        print('HERE')
+        print(self.__KEYS['public_key'])
+
+        if self.__KEYS['private_key'] is None:
+            raise ValueError('Key is not set')
+
+        private_key: bytes = bytes.fromhex(self.__KEYS['private_key'])
+
+        key = serialization.load_ssh_private_key(
+            private_key,
+            backend=default_backend(),
+            password=None
+        )
+
+        plaintext = key.decrypt(
+            message.encode('utf-8').strip(),
+            padding.OAEP(
+                mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                algorithm=hashes.SHA256(),
+                label=None
+            )
+        )
+
+        return plaintext

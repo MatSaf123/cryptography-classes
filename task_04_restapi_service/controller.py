@@ -100,11 +100,10 @@ def get_keys_in_ssh_format_asymmetric() -> dict:
     :return: asymmetric keys in OpenSSH format
     :rtype: dict
     """
-
-    result = AE.get_keys_in_ssh_format()
-    if result['public_key'] is None:
+    try:
+        return AE.get_keys_in_ssh_format()
+    except ValueError:
         logger.info('You must first set the public and private key.')
-    return result
 
 
 @app.post('/asymmetric/key')
@@ -152,5 +151,35 @@ def verify(message: str, signature: str) -> bool:
 
     try:
         return AE.verify_message(message, signature)
+    except ValueError:
+        logger.info('Invalid input data or keys value on the server.')
+
+
+@app.post('/asymmetric/encode')
+def encode_asymmetric(message: str) -> bytes:
+    """Encode message with asymmetric keys
+
+    :param message: message to be encrypted
+    :return: encrypted message
+    :rtype: bytes
+    """
+
+    try:
+        return AE.encode_message(message)
+    except ValueError:
+        logger.info('Invalid input data or keys value on the server.')
+
+
+@app.post('/asymmetric/decode')
+def decode_asymmetric(message: str) -> bytes:
+    """Decode message with asymmetric keys
+
+    :param message: message to be decrypted
+    :return: decrypted message
+    :rtype: bytes
+    """
+
+    try:
+        return AE.decode_message(message)
     except ValueError:
         logger.info('Invalid input data or keys value on the server.')
