@@ -176,8 +176,10 @@ class AsymmetricEncrypter:
 
         return base64.b64encode(ciphertext)
 
-    def decode_message(self, message: str) -> bytes:
+    def decode_message(self, message: str) -> str:
         """Decode message with asymmetric keys
+
+        TODO: Fix
 
         :param message:
         :return: decrypted message
@@ -196,7 +198,7 @@ class AsymmetricEncrypter:
         )
 
         plaintext = key.decrypt(
-            base64.b64decode(bytes(message, 'ascii')),
+            base64.b64decode(message),
             padding.OAEP(
                 mgf=padding.MGF1(algorithm=hashes.SHA256()),
                 algorithm=hashes.SHA256(),
@@ -204,4 +206,4 @@ class AsymmetricEncrypter:
             )
         )
 
-        return plaintext
+        return str(plaintext)

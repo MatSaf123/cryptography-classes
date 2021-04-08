@@ -170,16 +170,17 @@ def encode_asymmetric(message: str) -> bytes:
         logger.info('Invalid input data or keys value on the server.')
 
 
-@app.post('/asymmetric/decode')
-def decode_asymmetric(message: str) -> bytes:
-    """Decode message with asymmetric keys
-
-    :param message: message to be decrypted
-    :return: decrypted message
-    :rtype: bytes
-    """
-
-    try:
-        return AE.decode_message(message)
-    except ValueError:
-        logger.info('Invalid input data or keys value on the server.')
+# # bugged
+# @app.post('/asymmetric/decode')
+# def decode_asymmetric(message: str) -> bytes:
+#     """Decode message with asymmetric keys
+#
+#     :param message: message to be decrypted
+#     :return: decrypted message
+#     :rtype: bytes
+#     """
+#
+#     try:
+#         return AE.decode_message(message)
+#     except ValueError:
+#         logger.info('Invalid input data or keys value on the server.')
