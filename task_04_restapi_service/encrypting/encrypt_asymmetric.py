@@ -85,10 +85,11 @@ class AsymmetricEncrypter:
             }
 
     def sign_message(self, message: str) -> bytes:
-        """TODO
+        """Create a signature with use of secret key for message
 
-        :param message:
-        :return:
+        :param message: message of which the signature is created
+        :return: signature for the message
+        :rtype: bytes
         """
 
         if self.__KEYS['private_key'] is None:
@@ -114,11 +115,12 @@ class AsymmetricEncrypter:
         return base64.b64encode(signature)
 
     def verify_message(self, message: str, signature: str) -> bool:
-        """TODO
+        """Verify message with it's signature and local public key.
 
-        :param signature:
-        :param message:
-        :return:
+        :param signature: signature for incoming message
+        :param message: incoming message
+        :return: True if match, False if not
+        :rtype: bool
         """
 
         if self.__KEYS['public_key'] is None:

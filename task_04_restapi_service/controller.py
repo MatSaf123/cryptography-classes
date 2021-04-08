@@ -119,11 +119,12 @@ def set_keys_asymmetric(keys: dict):
 
 
 @app.post('/asymmetric/sign')
-def sign(message: str):
-    """TODO
+def sign(message: str) -> bytes:
+    """Give signature for message
 
-    :param message:
-    :return:
+    :param message: message of which the signature is created
+    :return: signature for the message
+    :rtype: bytes
     """
 
     result = AE.sign_message(message)
