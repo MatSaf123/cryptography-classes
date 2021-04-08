@@ -14,7 +14,7 @@ AE = AsymmetricEncrypter()
 
 # symmetric endpoints
 
-@app.get('/symmetric/key')
+@app.get('/symmetric/key', tags=['Symmetric'])
 def get_random_key_symmetric() -> str:
     """Generates and returns a random symmetric key
 
@@ -25,7 +25,7 @@ def get_random_key_symmetric() -> str:
     return SE.generate_random_key()
 
 
-@app.post('/symmetric/key')
+@app.post('/symmetric/key', tags=['Symmetric'])
 def set_key_symmetric(key: str) -> bool:
     """Try to set symmetric key on the server.
 
@@ -43,7 +43,7 @@ def set_key_symmetric(key: str) -> bool:
         return True
 
 
-@app.post('/symmetric/encode')
+@app.post('/symmetric/encode', tags=['Symmetric'])
 def encode_symmetric(message: str) -> bytes:
     """Encodes message entered by user with symmetrical key set on server
 
@@ -60,7 +60,7 @@ def encode_symmetric(message: str) -> bytes:
         return result
 
 
-@app.post('/symmetric/decode')
+@app.post('/symmetric/decode', tags=['Symmetric'])
 def decode_symmetric(message: str) -> bytes:
     """Decodes message entered by user with symmetrical key set on server
 
@@ -79,7 +79,7 @@ def decode_symmetric(message: str) -> bytes:
 
 # asymmetric endpoints
 
-@app.get('/asymmetric/key')
+@app.get('/asymmetric/key', tags=['Asymmetric'])
 def get_and_set_random_keys_asymmetric() -> dict:
     """Generates and returns random public and private asymmetric keys;
     saves them on the server.
@@ -93,7 +93,7 @@ def get_and_set_random_keys_asymmetric() -> dict:
     return keys
 
 
-@app.get('/asymmetric/key/ssh')
+@app.get('/asymmetric/key/ssh', tags=['Asymmetric'])
 def get_keys_in_ssh_format_asymmetric() -> dict:
     """Get asymmetric keys saved on the server in OpenSSH format.
 
@@ -106,7 +106,7 @@ def get_keys_in_ssh_format_asymmetric() -> dict:
         logger.info('You must first set the public and private key.')
 
 
-@app.post('/asymmetric/key')
+@app.post('/asymmetric/key', tags=['Asymmetric'])
 def set_keys_asymmetric(keys: dict) -> bool:
     """Try to set public and private asymmetric keys on the server.
 
@@ -124,7 +124,7 @@ def set_keys_asymmetric(keys: dict) -> bool:
         return True
 
 
-@app.post('/asymmetric/sign')
+@app.post('/asymmetric/sign', tags=['Asymmetric'])
 def sign(message: str) -> bytes:
     """Give signature for message
 
@@ -139,7 +139,7 @@ def sign(message: str) -> bytes:
         logger.info('Invalid input data or keys value on the server.')
 
 
-@app.post('/asymmetric/verify')
+@app.post('/asymmetric/verify', tags=['Asymmetric'])
 def verify(message: str, signature: str) -> bool:
     """Verify message signature
 
@@ -155,7 +155,7 @@ def verify(message: str, signature: str) -> bool:
         logger.info('Invalid input data or keys value on the server.')
 
 
-@app.post('/asymmetric/encode')
+@app.post('/asymmetric/encode', tags=['Asymmetric'])
 def encode_asymmetric(message: str) -> bytes:
     """Encode message with asymmetric keys
 
@@ -170,7 +170,7 @@ def encode_asymmetric(message: str) -> bytes:
         logger.info('Invalid input data or keys value on the server.')
 
 
-@app.post('/asymmetric/decode')
+@app.post('/asymmetric/decode', tags=['Asymmetric'])
 def decode_asymmetric(message: str) -> bytes:
     """Decode message with asymmetric keys
 

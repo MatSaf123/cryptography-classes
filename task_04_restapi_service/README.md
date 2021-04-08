@@ -12,6 +12,8 @@ Run with:
     hypercorn controller:app --reload
 ```
 
-#
+Use / Test on:
 
-TODO: README.md!
+```
+    http://127.0.0.1:8000/docs
+```
