@@ -137,7 +137,7 @@ def sign(message: str) -> bytes:
     try:
         return AE.sign_message(message)
     except ValueError:
-        logger.info('You must first set the public and private key.')
+        logger.info('Invalid input data or keys value on the server.')
 
 
 @app.post('/asymmetric/verify')
@@ -153,4 +153,4 @@ def verify(message: str, signature: str) -> bool:
     try:
         return AE.verify_message(message, signature)
     except ValueError:
-        logger.info('You must first set the public and private key.')
+        logger.info('Invalid input data or keys value on the server.')
