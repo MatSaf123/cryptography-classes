@@ -134,12 +134,14 @@ def sign(message: str):
 
 
 @app.post('/asymmetric/verify')
-def verify(message: str):
-    """TODO
+def verify(message: str, signature: str):
+    """Verify message signature
 
-    :param message:
-    :return:
+    :param signature:
+    :param message: message to verify
+    :return: True if signature matches, False if it doesn't
+    :rtype: bool
     """
 
     # TODO: exceptions handling
-    return AE.verify_message(message)
+    return AE.verify_message(message, signature)

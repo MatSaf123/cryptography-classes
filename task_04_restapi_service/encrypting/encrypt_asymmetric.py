@@ -7,6 +7,7 @@ from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.exceptions import InvalidSignature
 from util import is_hexadecimal
 
+
 class AsymmetricEncrypter:
 
     def __init__(self):
@@ -104,7 +105,7 @@ class AsymmetricEncrypter:
         hashed_message = hashlib.sha256(message.encode('utf-8')).hexdigest()
 
         signature = key.sign(
-            b'{hashed_message}',
+            bytes(hashed_message.encode('ascii')),
             padding.PSS(
                 mgf=padding.MGF1(hashes.SHA256()),
                 salt_length=padding.PSS.MAX_LENGTH),
@@ -112,15 +113,16 @@ class AsymmetricEncrypter:
 
         return base64.b64encode(signature)
 
-    def verify_message(self, message: str) -> bool:
+    def verify_message(self, message: str, signature: str) -> bool:
         """TODO
 
+        :param signature:
         :param message:
         :return:
         """
 
-        if self.__KEYS['private_key'] is None:
-            raise ValueError('The key is not set')
+        if self.__KEYS['public_key'] is None:
+            raise ValueError('Key is not set')
 
         public_key: bytes = bytes.fromhex(self.__KEYS['public_key'])
 
@@ -129,13 +131,14 @@ class AsymmetricEncrypter:
             backend=default_backend()
         )
 
-        decoded_message = base64.b64decode(message.encode('utf-8'))
-        hashed_message = hashlib.sha256(message.encode('utf-8')).hexdigest()
+        decoded_signature = base64.b64decode(signature)
+
+        prehashed_message = hashlib.sha256(message.encode('ascii')).hexdigest()
 
         try:
             key.verify(
-                decoded_message,
-                b'{hashed_message}',
+                decoded_signature,
+                bytes(prehashed_message.encode('ascii')),
                 padding.PSS(
                     mgf=padding.MGF1(hashes.SHA256()),
                     salt_length=padding.PSS.MAX_LENGTH),
