@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from encrypting.encrypt_symmetric import SymetricEncrypter
 from encrypting.encrypt_asymmetric import AsymmetricEncrypter
 import logging
+import json
 
 logger = logging.getLogger('controller')
 logging.basicConfig(level=logging.INFO)
@@ -75,14 +76,16 @@ def decode_symmetric(message: str) -> bytes:
 # asymmetric endpoints
 
 @app.get('/asymmetric/key')
-def get_random_keys_asymmetric() -> dict:
-    """Generates and returns random public and private asymmetric keys
+def get_and_set_random_keys_asymmetric() -> dict:
+    """Generates and returns random public and private asymmetric keys;
+    saves them on the server.
 
     :return: randomly generated asymmetric keys
     :rtype: dict
     """
 
     keys = AE.generate_random_keys()
+    AE.set_keys(keys)
     return keys
 
 
