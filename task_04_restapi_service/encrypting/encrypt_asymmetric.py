@@ -47,24 +47,21 @@ class AsymmetricEncrypter:
             'public_key': public_key.hex()
         }
 
-    def set_keys(self, keys: dict) -> bool:
+    def set_keys(self, keys: dict):
         """Validates input nad set public key and private key values.
 
         :param keys: public key and private key values
-        :return: True if successfully saved keys, False if didn't
-        :rtype: bool
         """
 
         new_public_key = keys['public_key']
         new_private_key = keys['private_key']
 
         if not new_public_key or not new_private_key:
-            return False
+            raise ValueError
         elif not is_hexadecimal(new_public_key) or not is_hexadecimal(new_private_key):
-            return False
+            raise ValueError
         else:
             self.__KEYS = keys
-            return True
 
     def get_keys_in_ssh_format(self) -> dict:
         """Returns public key and private key saved in OpenSSH format.
@@ -74,7 +71,7 @@ class AsymmetricEncrypter:
         """
 
         if self.__KEYS['public_key'] is None:
-            return self.__KEYS
+            raise ValueError
         else:
             publ: str = self.__KEYS['public_key']
             priv: str = self.__KEYS['private_key']
@@ -93,7 +90,7 @@ class AsymmetricEncrypter:
         """
 
         if self.__KEYS['private_key'] is None:
-            return b''
+            raise ValueError
 
         private_key: bytes = bytes.fromhex(self.__KEYS['private_key'])
 
