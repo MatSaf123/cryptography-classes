@@ -179,7 +179,7 @@ class AsymmetricEncrypter:
     def decode_message(self, message: str) -> bytes:
         """Decode message with asymmetric keys
 
-        :param message:
+        :param message: message to be decrypted
         :return: decrypted message
         :rtype: bytes
         """
