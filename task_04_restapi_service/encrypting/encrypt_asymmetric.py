@@ -160,9 +160,6 @@ class AsymmetricEncrypter:
 
         public_key: bytes = bytes.fromhex(self.__KEYS['public_key'])
 
-        print('HERE2')
-        print(public_key)
-
         key = serialization.load_ssh_public_key(
             public_key,
             backend=default_backend()
@@ -186,9 +183,6 @@ class AsymmetricEncrypter:
         :return: decrypted message
         :rtype: bytes
         """
-
-        print('HERE')
-        print(self.__KEYS['public_key'])
 
         if self.__KEYS['private_key'] is None:
             raise ValueError('Key is not set')
