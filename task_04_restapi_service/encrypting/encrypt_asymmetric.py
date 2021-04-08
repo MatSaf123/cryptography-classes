@@ -1,8 +1,10 @@
+import base64
+import hashlib
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import rsa
-from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives import serialization, hashes
+from cryptography.hazmat.primitives.asymmetric import padding
 from util import is_hexadecimal
-import json
 
 
 class AsymmetricEncrypter:
@@ -25,6 +27,7 @@ class AsymmetricEncrypter:
             key_size=2048,
             backend=default_backend()
         )
+
         publ_pem = priv_pem.public_key()
 
         private_key = priv_pem.private_bytes(
@@ -79,3 +82,32 @@ class AsymmetricEncrypter:
                 'public_key': bytes.fromhex(publ),
                 'private_key': bytes.fromhex(priv)
             }
+
+    def sign_message(self, message: str) -> bytes:
+        """TODO
+
+        :param message:
+        :return:
+        """
+
+        if self.__KEYS['private_key'] is None:
+            return b''
+
+        private_key: bytes = bytes.fromhex(self.__KEYS['private_key'])
+
+        key = serialization.load_ssh_private_key(
+            private_key,
+            password=None,
+            backend=default_backend()
+        )
+
+        hashed_message = hashlib.sha256(message.encode('utf-8')).hexdigest()
+
+        signature = key.sign(
+            b'{hashed_message}',
+            padding.PSS(
+                mgf=padding.MGF1(hashes.SHA256()),
+                salt_length=padding.PSS.MAX_LENGTH),
+            hashes.SHA256())
+
+        return base64.b64encode(signature)

@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from encrypting.encrypt_symmetric import SymetricEncrypter
 from encrypting.encrypt_asymmetric import AsymmetricEncrypter
 import logging
-import json
 
 logger = logging.getLogger('controller')
 logging.basicConfig(level=logging.INFO)
@@ -117,3 +116,22 @@ def set_keys_asymmetric(keys: dict):
     else:
         logger.info('Invalid keys parameter value entered.')
         return False
+
+
+@app.post('/asymmetric/sign')
+def sign(message: str):
+    """TODO
+
+    :param message:
+    :return:
+    """
+    result = AE.sign_message(message)
+    if result == b'':
+        logger.info('You must first set the public and private key.')
+    else:
+        return result
+
+
+@app.post('/asymmetric/verify')
+def verify():
+    pass
