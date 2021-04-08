@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from encrypting.encrypt_symmetric import SymetricEncrypter
-from util import is_hexadecimal
+from encrypting.encrypt_asymmetric import AsymmetricEncrypter
 import logging
+import json
 
 logger = logging.getLogger('controller')
 logging.basicConfig(level=logging.INFO)
@@ -9,6 +10,7 @@ logging.basicConfig(level=logging.INFO)
 app = FastAPI()
 
 SE = SymetricEncrypter()
+AE = AsymmetricEncrypter()
 
 
 # symmetric endpoints
@@ -27,22 +29,18 @@ def get_random_key_symmetric() -> str:
 
 @app.post('/symmetric/key')
 def set_key_symmetric(key: str) -> bool:
-    """Sets up symmetric key on server
+    """Try to set symmetric key on the server.
 
     :param key: key in hexadecimal format provided by user
     :return: True if successfully saved the key, False if didn't
     :rtype: bool
     """
 
-    if is_hexadecimal(key):
-        SE.KEY = key
-        return True
-    else:
-        return False
+    return SE.set_key(key)
 
 
 @app.post('/symmetric/encode')
-def symmetric_encode(message: str) -> bytes:
+def encode_symmetric(message: str) -> bytes:
     """Encodes message entered by user with symmetrical key set on server
 
     :param message: cleartext to be encoded
@@ -50,16 +48,16 @@ def symmetric_encode(message: str) -> bytes:
     :rtype: bytes
     """
 
-    try:
-        assert SE.KEY is not None, 'Key value is not set'
-    except AssertionError:
-        logger.info('Set the key on the server before encoding a message.')
+    result: bytes = SE.encode(message)
+
+    if result == b'':
+        logger.info('You need to set up the key first before encoding anything.')
     else:
-        return SE.encode(message)
+        return result
 
 
 @app.post('/symmetric/decode')
-def symmetric_decode(message: str) -> bytes:
+def decode_symmetric(message: str) -> bytes:
     """Decodes message entered by user with symmetrical key set on server
 
     :param message: encoded text to be decoded
@@ -67,9 +65,55 @@ def symmetric_decode(message: str) -> bytes:
     :rtype: bytes
     """
 
-    try:
-        assert SE.KEY is not None
-    except AssertionError:
-        logger.info('Set the key on the server before decoding a message.')
+    result: bytes = SE.decode(message)
+
+    if result == b'':
+        logger.info('You need to set up the key first before decoding anything.')
     else:
-        return SE.decode(message)
+        return result
+
+
+# asymmetric endpoints
+
+@app.get('/asymmetric/key')
+def get_and_set_random_keys_asymmetric() -> dict:
+    """Generates and returns random public and private asymmetric keys;
+    saves them on the server.
+
+    :return: randomly generated asymmetric keys
+    :rtype: dict
+    """
+
+    keys = AE.generate_random_keys()
+    AE.set_keys(keys)
+    return keys
+
+
+@app.get('/asymmetric/key/ssh')
+def get_keys_in_ssh_format_asymmetric() -> dict:
+    """Get asymmetric keys saved on the server in OpenSSH format.
+
+    :return: asymmetric keys in OpenSSH format
+    :rtype: dict
+    """
+
+    result = AE.get_keys_in_ssh_format()
+    if result['public_key'] is None:
+        logger.info('You must first set the public and private key.')
+    return result
+
+
+@app.post('/asymmetric/key')
+def set_keys_asymmetric(keys: dict):
+    """Try to set public and private asymmetric keys on the server.
+
+    :param keys: public key and private key
+    :return: True if successfully saved the key, False if didn't
+    :rtype: bool
+    """
+
+    if AE.set_keys(keys):
+        return True
+    else:
+        logger.info('Invalid keys parameter value entered.')
+        return False
