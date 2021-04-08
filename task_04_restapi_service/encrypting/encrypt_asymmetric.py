@@ -4,8 +4,8 @@ from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.exceptions import InvalidSignature
 from util import is_hexadecimal
-
 
 class AsymmetricEncrypter:
 
@@ -111,3 +111,36 @@ class AsymmetricEncrypter:
             hashes.SHA256())
 
         return base64.b64encode(signature)
+
+    def verify_message(self, message: str) -> bool:
+        """TODO
+
+        :param message:
+        :return:
+        """
+
+        if self.__KEYS['private_key'] is None:
+            raise ValueError('The key is not set')
+
+        public_key: bytes = bytes.fromhex(self.__KEYS['public_key'])
+
+        key = serialization.load_ssh_public_key(
+            public_key,
+            backend=default_backend()
+        )
+
+        decoded_message = base64.b64decode(message.encode('utf-8'))
+        hashed_message = hashlib.sha256(message.encode('utf-8')).hexdigest()
+
+        try:
+            key.verify(
+                decoded_message,
+                b'{hashed_message}',
+                padding.PSS(
+                    mgf=padding.MGF1(hashes.SHA256()),
+                    salt_length=padding.PSS.MAX_LENGTH),
+                hashes.SHA256())
+        except InvalidSignature:
+            return False
+        else:
+            return True

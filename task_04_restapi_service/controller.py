@@ -125,6 +125,7 @@ def sign(message: str):
     :param message:
     :return:
     """
+
     result = AE.sign_message(message)
     if result == b'':
         logger.info('You must first set the public and private key.')
@@ -133,5 +134,12 @@ def sign(message: str):
 
 
 @app.post('/asymmetric/verify')
-def verify():
-    pass
+def verify(message: str):
+    """TODO
+
+    :param message:
+    :return:
+    """
+
+    # TODO: exceptions handling
+    return AE.verify_message(message)
