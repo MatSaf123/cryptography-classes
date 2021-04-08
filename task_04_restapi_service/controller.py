@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from encrypting.encrypt_symmetric import SymetricEncrypter
 from encrypting.encrypt_asymmetric import AsymmetricEncrypter
 import logging
-import json
 
 logger = logging.getLogger('controller')
 logging.basicConfig(level=logging.INFO)
@@ -23,8 +22,7 @@ def get_random_key_symmetric() -> str:
     :rtype: str (hexadecimal)
     """
 
-    key = SE.generate_random_key()
-    return key
+    return SE.generate_random_key()
 
 
 @app.post('/symmetric/key')
@@ -36,7 +34,13 @@ def set_key_symmetric(key: str) -> bool:
     :rtype: bool
     """
 
-    return SE.set_key(key)
+    try:
+        SE.set_key(key)
+    except ValueError:
+        logger.info('Invalid key value entered.')
+        return False
+    else:
+        return True
 
 
 @app.post('/symmetric/encode')
@@ -48,9 +52,9 @@ def encode_symmetric(message: str) -> bytes:
     :rtype: bytes
     """
 
-    result: bytes = SE.encode(message)
-
-    if result == b'':
+    try:
+        result: bytes = SE.encode(message)
+    except ValueError:
         logger.info('You need to set up the key first before encoding anything.')
     else:
         return result
@@ -65,9 +69,9 @@ def decode_symmetric(message: str) -> bytes:
     :rtype: bytes
     """
 
-    result: bytes = SE.decode(message)
-
-    if result == b'':
+    try:
+        result: bytes = SE.decode(message)
+    except ValueError:
         logger.info('You need to set up the key first before decoding anything.')
     else:
         return result
@@ -104,7 +108,7 @@ def get_keys_in_ssh_format_asymmetric() -> dict:
 
 
 @app.post('/asymmetric/key')
-def set_keys_asymmetric(keys: dict):
+def set_keys_asymmetric(keys: dict) -> bool:
     """Try to set public and private asymmetric keys on the server.
 
     :param keys: public key and private key
@@ -112,8 +116,41 @@ def set_keys_asymmetric(keys: dict):
     :rtype: bool
     """
 
-    if AE.set_keys(keys):
-        return True
-    else:
+    try:
+        AE.set_keys(keys)
+    except ValueError:
         logger.info('Invalid keys parameter value entered.')
         return False
+    else:
+        return True
+
+
+@app.post('/asymmetric/sign')
+def sign(message: str) -> bytes:
+    """Give signature for message
+
+    :param message: message of which the signature is created
+    :return: signature for the message
+    :rtype: bytes
+    """
+
+    try:
+        return AE.sign_message(message)
+    except ValueError:
+        logger.info('You must first set the public and private key.')
+
+
+@app.post('/asymmetric/verify')
+def verify(message: str, signature: str) -> bool:
+    """Verify message signature
+
+    :param signature:
+    :param message: message to verify
+    :return: True if signature matches, False if it doesn't
+    :rtype: bool
+    """
+
+    try:
+        return AE.verify_message(message, signature)
+    except ValueError:
+        logger.info('You must first set the public and private key.')

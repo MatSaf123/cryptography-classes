@@ -6,19 +6,16 @@ class SymetricEncrypter:
     def __init__(self):
         self.__KEY = None
 
-    def set_key(self, key: str) -> bool:
+    def set_key(self, key: str):
         """Validates and sets up symmetric key on server
 
         :param key: key in hexadecimal format provided by user
-        :return: True if successfully saved the key, False if didn't
-        :rtype: bool
         """
 
         if is_hexadecimal(key):
             self.__KEY = key
-            return True
         else:
-            return False
+            raise ValueError
 
     def generate_random_key(self) -> str:
         """Generate a random key
@@ -39,7 +36,7 @@ class SymetricEncrypter:
         """
 
         if self.__KEY is None:
-            return b''
+            raise ValueError
         else:
             f = Fernet(bytes.fromhex(self.__KEY))
             return f.encrypt(bytes(message, 'utf-8'))
@@ -53,7 +50,7 @@ class SymetricEncrypter:
         """
 
         if self.__KEY is None:
-            return b''
+            raise ValueError
         else:
             f = Fernet(bytes.fromhex(self.__KEY))
             return f.decrypt(bytes(message, 'utf-8'))
