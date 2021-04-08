@@ -29,7 +29,7 @@ def get_random_key_symmetric() -> str:
 
 @app.post('/symmetric/key')
 def set_key_symmetric(key: str) -> bool:
-    """Validates and sets up symmetric key on server
+    """Try to set symmetric key on the server.
 
     :param key: key in hexadecimal format provided by user
     :return: True if successfully saved the key, False if didn't
@@ -91,10 +91,29 @@ def get_and_set_random_keys_asymmetric() -> dict:
 
 @app.get('/asymmetric/key/ssh')
 def get_keys_in_ssh_format_asymmetric() -> dict:
-    """TODO
+    """Get asymmetric keys saved on the server in OpenSSH format.
 
     :return: asymmetric keys in OpenSSH format
     :rtype: dict
     """
 
-    return {}
+    result = AE.get_keys_in_ssh_format()
+    if result['public_key'] is None:
+        logger.info('You must first set the public and private key.')
+    return result
+
+
+@app.post('/asymmetric/key')
+def set_keys_asymmetric(keys: dict):
+    """Try to set public and private asymmetric keys on the server.
+
+    :param keys: public key and private key
+    :return: True if successfully saved the key, False if didn't
+    :rtype: bool
+    """
+
+    if AE.set_keys(keys):
+        return True
+    else:
+        logger.info('Invalid keys parameter value entered.')
+        return False
