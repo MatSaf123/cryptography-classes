@@ -9,6 +9,6 @@ Install modules with:
 Run with:
 
 ```
-    python main.py TextToEncrypt
+    python main.py "Text to encrypt"
 ```
 
