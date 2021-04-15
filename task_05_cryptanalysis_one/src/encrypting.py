@@ -24,6 +24,7 @@ class Encrypter:
     def encrypt(self, cleartext: str, format_text: bool = False) -> str:
         """Encrypts cleartext with custom cipher
 
+        :param format_text: True if to force formatting (remove all commas, dots etc.)
         :param cleartext: text about to be encrypted
         :return: encrypted cleartext
         """
