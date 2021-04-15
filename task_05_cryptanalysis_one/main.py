@@ -13,4 +13,3 @@ if __name__ == '__main__':
     s1 = sys.argv[1]
 
     logger.info(en.encrypt(s1))
-

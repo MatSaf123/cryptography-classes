@@ -29,8 +29,8 @@ class Encrypter:
         """
 
         # converts cleartext to uppercase, removes whitespaces
-
         cleartext = cleartext.upper().replace(' ', '')
+
 
         try:
             self.validate_cleartext(cleartext)
