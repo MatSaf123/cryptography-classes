@@ -21,7 +21,6 @@ class Encrypter:
         elif not cleartext.isalpha():
             raise ValueError('Cleartext contains not allowed characters (allowed chars: a-z A-Z)')
 
-
     def encrypt(self, cleartext: str) -> str:
         """Encrypts cleartext with custom cipher
 

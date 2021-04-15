@@ -1,11 +1,16 @@
 # main
 
+import sys
 from src.encrypting import Encrypter
+import logging
+
+logger = logging.getLogger('main')
+logging.basicConfig(level=logging.INFO)
 
 if __name__ == '__main__':
     en = Encrypter()
-    text = 'Some test message'
-    print('Cleartext:', text)
-    cipher = en.encrypt(text)
-    print('Encrypted text:', cipher)
-    print('Decrypted text:', en.decrypt(cipher))
+
+    s1 = sys.argv[1]
+
+    logger.info(en.encrypt(s1))
+
