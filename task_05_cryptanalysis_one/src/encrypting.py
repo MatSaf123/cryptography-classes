@@ -4,7 +4,6 @@ import logging
 
 
 class Encrypter:
-
     __ALPHABET_SIZE = 26
     __UPPERCASE_A_ASCII_CODE = 65
 
@@ -22,6 +21,7 @@ class Encrypter:
         elif not cleartext.isalpha():
             raise ValueError('Cleartext contains not allowed characters (allowed chars: a-z A-Z)')
 
+
     def encrypt(self, cleartext: str) -> str:
         """Encrypts cleartext with custom cipher
 
@@ -30,6 +30,7 @@ class Encrypter:
         """
 
         # converts cleartext to uppercase, removes whitespaces
+
         cleartext = cleartext.upper().replace(' ', '')
 
         try:

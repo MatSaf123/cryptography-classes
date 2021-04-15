@@ -3,7 +3,6 @@
 from src.encrypting import Encrypter
 
 if __name__ == '__main__':
-
     en = Encrypter()
     text = 'Some test message'
     print('Cleartext:', text)

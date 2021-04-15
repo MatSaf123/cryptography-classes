@@ -20,3 +20,7 @@ def test_wrong_cleartext():
 def test_empty_cleartext():
     with pytest.raises(ValueError):
         en.validate_cleartext('')
+
+
+def test_wrong_cleartext_encrypt():
+    assert en.encrypt('Z340') == ''
