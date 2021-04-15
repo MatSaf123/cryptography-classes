@@ -1,10 +1,17 @@
 # all encrypting logic
 
+import logging
+
 
 class Encrypter:
 
-    @staticmethod
-    def validate_cleartext(cleartext: str):
+    __ALPHABET_SIZE = 26
+    __UPPERCASE_A_ASCII_CODE = 65
+
+    logger = logging.getLogger('encrypter')
+    logging.basicConfig(level=logging.INFO)
+
+    def validate_cleartext(self, cleartext: str):
         """Checks if cleartext is not empty and alphabetical only.
 
         :param cleartext: cleartext to be validated
@@ -15,14 +22,49 @@ class Encrypter:
         elif not cleartext.isalpha():
             raise ValueError('Cleartext contains not allowed characters (allowed chars: a-z A-Z)')
 
-    @staticmethod
-    def encrypt(cleartext: str) -> str:
+    def encrypt(self, cleartext: str) -> str:
         """Encrypts cleartext with custom cipher
 
-        TODO: implement encrypting
-
-        :param cleartext: not encrypted text about to be encrypted
+        :param cleartext: text about to be encrypted
         :return: encrypted cleartext
         """
 
-        return cleartext
+        # converts cleartext to uppercase, removes whitespaces
+        cleartext = cleartext.upper().replace(' ', '')
+
+        try:
+            self.validate_cleartext(cleartext)
+        except ValueError as e:
+            self.logger.info(str(e))
+            return ''
+
+        encrypted_chars: list = []
+
+        for i in range(len(cleartext)):
+            c = cleartext[i]
+
+            stride = int((len(cleartext) - i) % self.__ALPHABET_SIZE)
+
+            encrypted_chars.append(chr((ord(
+                c) + stride - self.__UPPERCASE_A_ASCII_CODE) % self.__ALPHABET_SIZE + self.__UPPERCASE_A_ASCII_CODE))
+
+        return ''.join(encrypted_chars)
+
+    def decrypt(self, cipher: str) -> str:
+        """Decrypts encrypted text
+
+        :param cipher: encrypted text
+        :return: decrypted text
+        """
+
+        decrypted_chars: list = []
+
+        for i in range(len(cipher)):
+            c = cipher[i]
+
+            stride = int((len(cipher) - i) % 26)
+
+            decrypted_chars.append(chr((ord(
+                c) - stride - self.__UPPERCASE_A_ASCII_CODE) % self.__ALPHABET_SIZE + self.__UPPERCASE_A_ASCII_CODE))
+
+        return ''.join(decrypted_chars)

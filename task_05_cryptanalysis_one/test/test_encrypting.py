@@ -1,17 +1,22 @@
 import pytest
 from src.encrypting import Encrypter
 
+en = Encrypter()
 
-def test_valid_cleartext():
-    # TODO: change later
-    assert Encrypter.encrypt('abc') == 'abc'
+
+def test_valid_cleartext_encrypt():
+    assert en.encrypt('Some test message') == 'HCZQEOBBTKXWDIF'
+
+
+def test_valid_cleartext_decrypt():
+    assert en.decrypt('HCZQEOBBTKXWDIF') == 'SOMETESTMESSAGE'
 
 
 def test_wrong_cleartext():
     with pytest.raises(ValueError):
-        Encrypter.validate_cleartext('p83m')
+        en.validate_cleartext('Z340')
 
 
 def test_empty_cleartext():
     with pytest.raises(ValueError):
-        Encrypter.validate_cleartext('')
+        en.validate_cleartext('')
