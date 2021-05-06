@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<form method="post">
+
+    <div class="ui one column stackable center aligned page grid">
+       <div class="column twelve wide">
+           <div class="ui input">
+              <input name="sender" id="sender" type="text" placeholder="Sender">
+            </div>
+
+            <div class="ui input">
+              <input name="recipient" id="recipient" type="text" placeholder="Recipient">
+            </div>
+
+           <div class="ui input">
+              <input name="amount" id="amount" type="text" placeholder="Amount">
+            </div>
+
+            <input name='submit_button' type="submit" class="ui button primary" value="Make transaction">
+       </div>
+    </div>
+
+</form>
+
+{% endblock %}
