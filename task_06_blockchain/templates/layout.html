@@ -9,19 +9,16 @@
 
         <header>
             <div class="ui four item menu" >
-              <a class="item active" href="{{ url_for('home') }}">Home</a>
+              <a class="item" href="{{ url_for('home') }}">Home</a>
               <a class="item" href="{{ url_for('new_transaction') }}">New transaction</a>
               <a class="item" href="{{ url_for('mine') }}">Mine</a>
               <a class="item" href="{{ url_for('chain') }}">Get chain</a>
             </div>
         </header>
 
-        <h2>Crypto Panel</h2>
-
-        {% block content %}
-
-        {% endblock %}
-
+        <div class="ui center aligned segment">
+        {% block content %}{% endblock %}
+        </div>
     </body>
 </html>
 

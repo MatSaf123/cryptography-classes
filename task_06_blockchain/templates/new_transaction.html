@@ -6,17 +6,24 @@
 
     <div class="ui one column stackable center aligned page grid">
        <div class="column twelve wide">
-           <div class="ui input">
-              <input name="sender" id="sender" type="text" placeholder="Sender">
-            </div>
 
+           <div class="ui label">Sender:
+           <div class="ui input">
+               <input name="sender" id="sender" type="text" placeholder="Bob">
+            </div>
+           </div>
+
+           <div class="ui label">Recipient:
             <div class="ui input">
-              <input name="recipient" id="recipient" type="text" placeholder="Recipient">
+              <input name="recipient" id="recipient" type="text" placeholder="Alice">
             </div>
+           </div>
 
+           <div class="ui label">Amount:
            <div class="ui input">
-              <input name="amount" id="amount" type="text" placeholder="Amount">
+              <input name="amount" id="amount" type="text" placeholder="100">
             </div>
+           </div>
 
             <input name='submit_button' type="submit" class="ui button primary" value="Make transaction">
        </div>

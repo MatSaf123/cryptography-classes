@@ -2,6 +2,16 @@
 
 {% block content %}
 
-// TODO : DOCS HERE
+    <h1>Blockchain with FastAPI</h1>
 
+    <p>Use menu above to navigate between pages.</p>
+    <p><a href="{{ url_for('home') }}">Home</a>: the page you are currently on!</p>
+    <p><a href="{{ url_for('new_transaction') }}">New transaction</a>: make new transaction</p>
+    <p><a href="{{ url_for('mine') }}">Mine</a>: mine some blocks (mining occurs when you enter the page)</p>
+    <p><a href="{{ url_for('chain') }}">Chain</a>: take a look at the blockchain</p>
+
+    <p>You could also go to swagger docs of the project by adding "/docs" at the end of the current url, if that's your thing (<a href="https://swagger.io/docs/">here</a> you can read about it).</p>
+
+    <h1>How it works</h1>
+    <p>Go make some transactions and then enter the 'Mining' page - then, you can see new data appear at the 'Get chain' page!</p>
 {% endblock %}
