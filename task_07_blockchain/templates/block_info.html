@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h3>{{block_info}}</h3>
+    <form method="post">
+        <div class="ui label">Block id:
+           <div class="ui input">
+               <input name="block_id" id="block_id" type="text" placeholder="0?...">
+            </div>
+
+            <input name='submit_button' type="submit" class="ui button primary" value="Search">
+        </div>
+    </form>
+{% endblock %}
