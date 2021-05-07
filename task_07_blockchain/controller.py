@@ -84,5 +84,28 @@ def home(request: Request):
     return templates.TemplateResponse('home.html', {'request': request})
 
 
+@app.get('/block', response_class=HTMLResponse)
+def block(request: Request):
+    """Get block info page route
+    """
+
+    return templates.TemplateResponse('block_info.html', {'request': request, 'block_info': 'Enter block id!'})
+
+
+@app.post('/block')
+def block(request: Request, block_id: str = Form(...)):
+    """Get block info page route
+    """
+
+
+
+    try:
+        block_info = ''.join(['Info for block with id ', block_id, ': ', str(blockchain.chain[int(block_id)])])
+    except IndexError:
+        block_info = ''.join(['No block with id: ', block_id])
+
+    return templates.TemplateResponse('block_info.html', {'request': request, 'block_info': block_info})
+
+
 # run server
 asyncio.run(serve(app, Config()))

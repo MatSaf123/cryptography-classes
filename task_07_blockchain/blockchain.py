@@ -20,6 +20,13 @@ class Block:
         block_string = json.dumps(self.__dict__, sort_keys=True)
         return sha256(block_string.encode()).hexdigest()
 
+    def __str__(self):
+        return '; '.join(['Index: '+str(self.index),
+                          'Transactions: '+str(self.transactions),
+                          'Timestamp: '+str(self.timestamp),
+                          'Previous hash: '+str(self.previous_hash),
+                          'Nonce: '+str(self.nonce)])
+
 
 class Blockchain:
     # difficulty of our PoW algorithm
