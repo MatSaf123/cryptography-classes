@@ -47,7 +47,8 @@ def new_transaction(request: Request, sender: str = Form(...), recipient: str = 
     }
 
     blockchain.add_new_transaction(transaction)
-    return templates.TemplateResponse('new_transaction.html', {'request': request, 'last_block': blockchain.last_block})
+    message = 'Transaction added!'
+    return templates.TemplateResponse('new_transaction.html', {'request': request, 'last_block': blockchain.last_block, 'new_transaction_added_message': message})
 
 
 @app.get('/new_transaction')
@@ -55,7 +56,7 @@ def get_new_transaction(request: Request):
     """New transaction route
     """
 
-    return templates.TemplateResponse('new_transaction.html', {'request': request})
+    return templates.TemplateResponse('new_transaction.html', {'request': request, 'new_transaction_added_message': ''})
 
 
 @app.get('/mine', response_class=HTMLResponse)
@@ -96,8 +97,6 @@ def block(request: Request):
 def block(request: Request, block_id: str = Form(...)):
     """Get block info page route
     """
-
-
 
     try:
         block_info = ''.join(['Info for block with id ', block_id, ': ', str(blockchain.chain[int(block_id)])])
